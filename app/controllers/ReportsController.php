@@ -10313,6 +10313,10 @@ public function period_advrem()
               'F' => '0',
               ));
 
+             $sheet->getStyle('F')->getAlignment()->applyFromArray(
+               array('horizontal' => 'center')
+              );
+
             
              $sheet->cell('H'.$row, function($cell) {
 
@@ -10569,7 +10573,9 @@ public function period_advrem()
               'F' => '0',
               ));
 
-             
+             $sheet->getStyle('F')->getAlignment()->applyFromArray(
+               array('horizontal' => 'center')
+              );
 
              $sheet->cell('H'.$row, function($cell) {
 
@@ -10842,6 +10848,9 @@ public function period_advrem()
               'F' => '0',
               ));
 
+             $sheet->getStyle('F')->getAlignment()->applyFromArray(
+               array('horizontal' => 'center')
+              );
             
              $row++;
              
