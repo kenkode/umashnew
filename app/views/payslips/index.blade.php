@@ -1,5 +1,15 @@
 @extends('layouts.payroll')
 
+{{ HTML::style('bootstrap-select-master/dist/css/bootstrap-select.css') }}
+{{ HTML::script('media/jquery-1.12.0.min.js') }}
+{{ HTML::script('bootstrap-select-master/dist/js/bootstrap-select.js') }}
+
+<style type="text/css">
+.dropdown-menu {
+    margin-left: -190px;
+}
+</style>
+
 <script type="text/javascript">
 function YNconfirm() { 
 var per = document.getElementById("period").value;
@@ -44,7 +54,7 @@ var per = document.getElementById("period").value;
         
         <div class="form-group">
                         <label for="username">Select Employee <span style="color:red">*</span></label>
-                        <select name="employeeid" class="form-control">
+                        <select name="employeeid" class="form-control selectpicker" data-live-search="true">
                            <option></option>
                             @foreach($employees as $employee)
                             <option value="{{ $employee->id }}"> {{ $employee->personal_file_number.' '.$employee->first_name.' '.$employee->last_name }}</option>

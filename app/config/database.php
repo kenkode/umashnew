@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'xpose',
+			'database'  => 'umashcok_umash',
 			'username'  => 'root',
 			'password'  => 'mysql',
 			'port' => '3306',

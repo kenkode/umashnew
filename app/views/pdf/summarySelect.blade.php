@@ -1,4 +1,13 @@
-@extends('layouts.payroll')
+@extends('layouts.ports')
+{{ HTML::style('bootstrap-select-master/dist/css/bootstrap-select.css') }}
+{{ HTML::script('media/jquery-1.12.0.min.js') }}
+{{ HTML::script('bootstrap-select-master/dist/js/bootstrap-select.js') }}
+
+<style type="text/css">
+.dropdown-menu {
+    margin-left: -190px;
+}
+</style>
 @section('content')
 <br/>
 
@@ -24,7 +33,7 @@
         </div>
         @endif
 
-		 <form method="POST" action="{{URL::to('payrollReports/payrollSummary')}}" accept-charset="UTF-8">
+		 <form target="_blank" method="POST" action="{{URL::to('payrollReports/payrollSummary')}}" accept-charset="UTF-8">
    
     <fieldset>
 
@@ -37,9 +46,10 @@
        </div>
 
             <div class="form-group">
-                        <label for="username">Select Branch:</label>
-                        <select name="branch" class="form-control">
+                        <label for="username">Select Branch: <span style="color:red">*</span></label>
+                        <select required name="branch" class="form-control selectpicker" data-live-search="true">
                             <option></option>
+                            <option value="All">All</option>
                             @foreach($branches as $branch)
                             <option value="{{$branch->id}}"> {{ $branch->name }}</option>
                             @endforeach
@@ -48,17 +58,12 @@
                 
             </div>
 
-            <div class="checkbox">
-                        <label>
-                            <input type="checkbox" checked name="selB">
-                              Select All Branches
-                        </label>
-                    </div>
 
             <div class="form-group">
-                        <label for="username">Select Department:</label>
-                        <select name="department" class="form-control">
+                        <label for="username">Select Department: <span style="color:red">*</span></label>
+                        <select required name="department" class="form-control selectpicker" data-live-search="true">
                             <option></option>
+                            <option value="All">All</option>
                             @foreach($depts as $dept)
                             <option value="{{$dept->id}}"> {{ $dept->department_name }}</option>
                             @endforeach
@@ -67,12 +72,16 @@
                 
             </div>
 
-            <div class="checkbox">
-                        <label>
-                            <input type="checkbox" checked name="selD">
-                              Select All Departments
-                        </label>
-                    </div>
+        
+            <div class="form-group">
+                        <label for="username">Download as: <span style="color:red">*</span></label>
+                        <select required name="format" class="form-control">
+                            <option></option>
+                            <option value="excel"> Excel</option>
+                            <option value="pdf"> PDF</option>
+                        </select>
+                
+            </div>
 
         
         <div class="form-actions form-group">

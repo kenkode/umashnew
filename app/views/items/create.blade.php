@@ -36,10 +36,9 @@
             <textarea rows="5" class="form-control" name="description" id="description" >{{ Input::old('email_office') }}</textarea>
         </div>
 
-        <div class="form-group">
-            <label for="username">Purchase Price <span style="color:red">*</span> :</label>
-            <input class="form-control" placeholder="" type="text" name="pprice" id="pprice" value="{{{ Input::old('pprice') }}}">
-        </div>
+    
+            <input class="form-control" placeholder="" type="hidden" name="pprice" id="pprice" value="0">
+        
 
         <div class="form-group">
             <label for="username">Price Rate <span style="color:red">*</span> :</label>
@@ -78,9 +77,16 @@
             <input class="form-control" placeholder="" type="text" name="tag" id="tag" value="{{{ Input::old('tag') }}}">
         </div>
         
-        <div class="form-group">
-            <label for="username">Reorder Level:</label>
-            <input class="form-control" placeholder="" type="text" name="reorder" id="reorder" value="{{{ Input::old('reorder') }}}">
+         <div class="form-group">
+            <label for="username">Store <span style="color:red">*</span> :</label>
+            <select name="location_id" class="form-control" required>
+
+                @foreach($locations as $location)
+                <option value="{{$location->id}}">{{$location->name}}</option>
+                @endforeach
+                
+            </select>
+            
         </div>
 
         <div class="form-actions form-group">

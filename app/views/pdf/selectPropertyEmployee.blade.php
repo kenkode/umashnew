@@ -1,4 +1,13 @@
-@extends('layouts.main')
+@extends('layouts.ports')
+{{ HTML::style('bootstrap-select-master/dist/css/bootstrap-select.css') }}
+{{ HTML::script('media/jquery-1.12.0.min.js') }}
+{{ HTML::script('bootstrap-select-master/dist/js/bootstrap-select.js') }}
+
+<style type="text/css">
+.dropdown-menu {
+    height: 400px;
+}
+</style>
 @section('content')
 <br/>
 
@@ -24,15 +33,19 @@
         </div>
         @endif
 
-		 <form method="POST" action="{{URL::to('reports/occurence')}}" accept-charset="UTF-8">
+		 <form target="_blank" method="POST" action="{{URL::to('reports/occurence')}}" accept-charset="UTF-8">
    
     <fieldset>
             <div class="form-group">
                         <label for="username">Select:</label>
-                        <select name="employeeid" class="form-control" required>
+                        <select name="employeeid" class="form-control selectpicker" data-live-search="true" required>
                             <option></option>
                             @foreach($employees as $employee)
-                            <option value="{{$employee->id }}"> {{ $employee->first_name.' '.$employee->last_name }}</option>
+                             @if($employee->middle_name != null || $employee->middle_name != '')
+                            <option value="{{$employee->id }}"> {{ $employee->personal_file_number.' : '.$employee->first_name.' '.$employee->middle_name.' '.$employee->last_name }}</option>
+                            @else
+                            <option value="{{$employee->id }}"> {{ $employee->personal_file_number.' : '.$employee->first_name.' '.$employee->last_name }}</option>
+                            @endif
                             @endforeach
 
                         </select>

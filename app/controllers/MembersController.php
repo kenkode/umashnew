@@ -315,6 +315,12 @@ $name = $employee->first_name.' '.$employee->last_name;
 		
 		if($email != null){
 
+
+			if(Mailsender::checkConnection() == false){
+
+				return Redirect::back()->with('notice', 'Employee has not been activated. Could not establish interenet connection. kindly check your mail settings');
+			}
+
 		DB::table('users')->insert(
 	array('email' => $employee->email_office, 
 	  'username' => $employee->personal_file_number,
@@ -331,7 +337,7 @@ $name = $employee->first_name.' '.$employee->last_name;
 
 
 
-	Mail::send( 'emails.password', array('password'=>$password, 'name'=>$name), function( $message ) use ($employee)
+	Mail::queue( 'emails.password', array('password'=>$password, 'name'=>$name), function( $message ) use ($employee)
 {
     $message->to($employee->email_office )->subject( 'Self Service Portal Credentials' );
 });
