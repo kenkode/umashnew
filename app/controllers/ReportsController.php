@@ -10051,6 +10051,17 @@ public function period_advrem()
               'F' => '0',
               ));
 
+             $sheet->getStyle('F')->getAlignment()->applyFromArray(
+               array('horizontal' => 'center')
+              );
+
+             $sheet->cell('B3', function($cell) {
+
+               // manipulate the cell
+                $cell->setAlignment('left');
+
+              });
+
              
              $row++;
              
