@@ -5594,7 +5594,7 @@ class ReportsController extends \BaseController {
              }
 
              $sheet->row($row, array(
-             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,$data[$i]->bank_account_number,$data[$i]->swift_code,$data[$i]->net
+             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,round($data[$i]->bank_account_number,0),$data[$i]->swift_code,$data[$i]->net
              ));
 
              $sheet->setColumnFormat(array(
@@ -5856,11 +5856,15 @@ class ReportsController extends \BaseController {
              }
 
              $sheet->row($row, array(
-             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,$data[$i]->bank_account_number,$data[$i]->swift_code,$data[$i]->net
+             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,round($data[$i]->bank_account_number,0),$data[$i]->swift_code,$data[$i]->net
              ));
              
              $sheet->setColumnFormat(array(
               'F'.$row => '0',
+              ));
+
+             $sheet->setColumnFormat(array(
+              'F13'.$row => '0',
               ));
 
               $sheet->cell('F'.$row, function($cell) {
@@ -6119,11 +6123,15 @@ class ReportsController extends \BaseController {
                $name=$data[$i]->first_name.' '.$data[$i]->middle_name.' '.$data[$i]->last_name;
              }
              $sheet->row($row, array(
-             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,$data[$i]->bank_account_number,$data[$i]->swift_code,$data[$i]->net
+             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,round($data[$i]->bank_account_number,0),$data[$i]->swift_code,$data[$i]->net
              ));
 
              $sheet->setColumnFormat(array(
               'F'.$row => '0',
+              ));
+
+              $sheet->setColumnFormat(array(
+              'F13'.$row => '0',
               ));
 
               $sheet->cell('F'.$row, function($cell) {
