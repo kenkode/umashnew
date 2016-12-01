@@ -181,6 +181,7 @@ class EmployeesController extends \BaseController {
 	{
 		//
     $currency = Currency::find(1);
+    $employees = Employee::all();
 		$branches = Branch::all();
 		$departments = Department::all();
 		$jgroups = Jobgroup::all();
@@ -190,7 +191,7 @@ class EmployeesController extends \BaseController {
 		$educations = Education::all();
 		$citizenships = Citizenship::all();
 		$pfn = Employee::orderBy('id', 'DESC')->first();
-		return View::make('employees.create', compact('currency','citizenships','pfn','branches','departments','etypes','jgroups','banks','bbranches','educations'));
+		return View::make('employees.create', compact('currency','employees','citizenships','pfn','branches','departments','etypes','jgroups','banks','bbranches','educations'));
 	}
 
 
@@ -308,11 +309,11 @@ class EmployeesController extends \BaseController {
         $employee->postal_address = Input::get('address');
         $employee->postal_zip = Input::get('zip');
         $employee->date_joined = Input::get('djoined');
-	    $employee->bank_id = Input::get('bank_id');
-	    $employee->bank_branch_id = Input::get('bbranch_id');
-	    $employee->branch_id = Input::get('branch_id');
-	    $employee->department_id = Input::get('department_id');
-	    $employee->job_group_id = Input::get('jgroup_id');
+  	    $employee->bank_id = Input::get('bank_id');
+  	    $employee->bank_branch_id = Input::get('bbranch_id');
+  	    $employee->branch_id = Input::get('branch_id');
+  	    $employee->department_id = Input::get('department_id');
+  	    $employee->job_group_id = Input::get('jgroup_id');
 		$employee->type_id = Input::get('type_id');
 		if(Input::get('i_tax') != null ){
 		$employee->income_tax_applicable = '1';
@@ -340,6 +341,17 @@ class EmployeesController extends \BaseController {
         $employee->end_date = Input::get('enddate');
 
 		$employee->save();
+
+    if(Input::get('supervisor') != null || Input::get('supervisor') != ""){
+
+    $supervisor = new Supervisor;
+
+    $supervisor->supervisor_id = Input::get('supervisor');
+
+    $supervisor->employee_id = $employee->id;
+        
+        $supervisor->save();
+        }
 
     Audit::logaudit('Employee', 'create', 'created: '.$employee->personal_file_number.'-'.$employee->first_name.' '.$employee->last_name);
 
@@ -444,6 +456,7 @@ class EmployeesController extends \BaseController {
 	public function edit($id)
 	{
 		$employee = Employee::find($id);
+    $employees = Employee::all();
 		$branches = Branch::all();
 		$departments = Department::all();
 		$jgroups = Jobgroup::all();
@@ -454,14 +467,17 @@ class EmployeesController extends \BaseController {
 		          ->where('type_id',2)
 		          ->first();
 		$banks = Bank::all();
-		$bbranches = BBranch::all();
+		$bbranches = BBranch::where('bank_id',$employee ->bank_id)->get();
 		$educations = Education::all();
     $kins = Nextofkin::where('employee_id',$id)->get();
     $docs = Document::where('employee_id',$id)->get();
     $countk = Nextofkin::where('employee_id',$id)->count();
     $countd = Document::where('employee_id',$id)->count();
     $currency = Currency::find(1);
-		return View::make('employees.edit', compact('currency','countk','countd','docs','kins','citizenships','contract','branches','educations','departments','etypes','jgroups','banks','bbranches','employee'));
+    $supervisor = Supervisor::where('employee_id',$id)->first();
+    $count = Supervisor::where('employee_id',$id)->count();
+    $subordinates = Employee::all();
+		return View::make('employees.edit', compact('count','subordinates','supervisor','currency','countk','countd','docs','kins','citizenships','contract','branches','educations','departments','etypes','jgroups','banks','bbranches','employee'));
 	}
 
 	/**
@@ -522,7 +538,8 @@ class EmployeesController extends \BaseController {
 		}else{
         $employee->pin = null;
 	    }
-	    if(Input::get('social_security_number') != null){
+	    if(Input::get('social_security_number') 
+        != null){
 		$employee->social_security_number = Input::get('social_security_number');
 	    }else{
         $employee->social_security_number = null;
@@ -544,7 +561,7 @@ class EmployeesController extends \BaseController {
         $employee->gender = Input::get('gender');
         $employee->marital_status = Input::get('status');
         $employee->yob = Input::get('dob');
-        $employee->citizenship_id = Input::get('citizenship');
+        //$employee->citizenship_id = Input::get('citizenship');
         $employee->mode_of_payment = Input::get('modep');
         if(Input::get('bank_account_number') != null ){
         $employee->bank_account_number = Input::get('bank_account_number');
@@ -614,6 +631,32 @@ class EmployeesController extends \BaseController {
         $employee->custom_field1 = Input::get('omode');
 		$employee->update();
 
+    $c = Supervisor::where('employee_id', $employee->id)->count();
+
+
+    if($c>0){
+
+    $supervisor = Supervisor::where('employee_id',$employee->id)->first();
+
+    $supervisor->supervisor_id = Input::get('supervisor');
+
+    $supervisor->employee_id = $employee->id;
+        
+        $supervisor->update();
+        }
+
+
+    else if(Input::get('supervisor') != null || Input::get('supervisor') != ""){
+
+    $supervisor = new Supervisor;
+
+    $supervisor->supervisor_id = Input::get('supervisor');
+
+    $supervisor->employee_id = $employee->id;
+        
+        $supervisor->save();
+        }
+
 		 Audit::logaudit('Employee', 'update', 'updated: '.$employee->personal_file_number.'-'.$employee->first_name.' '.$employee->last_name);
 
     Nextofkin::where('employee_id', $id)->delete();
@@ -637,7 +680,7 @@ class EmployeesController extends \BaseController {
       Document::where('employee_id', $id)->delete();
       $files = Input::file('path');
       $j = 0;
-
+      if(isset($files)){
        foreach($files as $file){
        
        if ( Input::get('doc_name')[$j] != null || Input::get('doc_name')[$j] != ''){
@@ -675,7 +718,8 @@ class EmployeesController extends \BaseController {
        Audit::logaudit('Documents', 'create', 'created: '.Input::get('doc_name')[$j].' for '.Employee::getEmployeeName($id));
        $j=$j+1;
        }
-       }
+     }
+  }
 
 
 		 if(Confide::user()->user_type == 'member'){

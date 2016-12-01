@@ -4,6 +4,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
+
 <style type="text/css">
 
 table {
@@ -30,15 +31,15 @@ body {
   line-height: 1.428571429;
   color: #333;
   background-color: #fff;
-}
 
 
-
- @page { margin: 170px 30px; }
- .header { position: fixed; left: 0px; top: -150px; right: 0px; height: 150px;  text-align: center; }
+ @page { margin: 50px 30px; }
+ .header { position: top; left: 0px; top: -150px; right: 0px; height: 100px;  text-align: center; }
  .content {margin-top: -100px; margin-bottom: -150px}
- .footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 50px;  }
+ .footer { position: fixed; left: 0px; bottom: -30px; right: 0px; height: 50px;  }
  .footer .page:after { content: counter(page, upper-roman); }
+
+
 
 
 
@@ -49,7 +50,7 @@ body {
 <body>
 
   <div class="header">
-     <table >
+       <table >
 
       <tr>
 
@@ -57,17 +58,17 @@ body {
        
         <td style="width:150px">
 
-            <img src="{{ '../images/logo.png' }}" alt="{{ $organization->logo }}" width="150px"/>
+            <img src="{{asset('public/uploads/logo/'.$organization->logo)}}" alt="logo" width="100%">
     
         </td>
 
         <td>
         <strong>
-          {{ strtoupper($organization->name)}}<br>
-          </strong>
-          {{ $organization->phone}} |
-          {{ $organization->email}} |
-          {{ $organization->website}}<br>
+          {{ strtoupper($organization->name)}}
+          </strong><br><p>
+          {{ $organization->phone}}<br><p> 
+          {{ $organization->email}}<br><p> 
+          {{ $organization->website}}<br><p>
           {{ $organization->address}}
        
 
@@ -94,8 +95,11 @@ body {
    </div>
 
 
-	<div class="content" style='margin-top:0px;'>
-   <div align="center"><strong>Clients Report</strong></div>
+  <div class="content" style='margin-top:0px;'>
+   <!-- <div align="center"><strong>Clients Report as at {{date('d-M-Y')}}</strong></div><br> -->
+   <div align="center"><strong>Clients Report as from:  {{$from}} To:  {{$to}}</strong></div><br>
+
+   
 
     <table class="table table-bordered" border='1' cellspacing='0' cellpadding='0'>
 
@@ -103,30 +107,55 @@ body {
         
 
 
-        <td width='20'><strong># </strong></td>
-        <td><strong>Name </strong></td>
-        <td><strong>Email </strong></td>
-        <td><strong>Phone </strong></td>
-        <td><strong>Address </strong></td>
-        <td><strong>Contact Person </strong></td>
-        <td><strong>Contact Person Email </strong></td>
-        <td><strong>Contact Person Phone </strong></td>
-        <td><strong>Type </strong></td>
+        <th width='20'><strong># </strong></th>
+        <th><strong>Name </strong></th>
+        <th><strong>Phone </strong></th>
+        <th><strong>Address </strong></th>               
+        <th><strong>Type </strong></th>
+        <th><strong>Amount Due </strong></th>
       </tr>
       <?php $i =1; ?>
       @foreach($clients as $client)
       <tr>
 
+       <?php  
+
+
+    $order = 0;
+    
+
+          /*if($client->type == 'Customer'){
+           $order = DB::table('erporders')
+           ->join('erporderitems','erporders.id','=','erporderitems.erporder_id')
+           ->join('clients','erporders.client_id','=','clients.id')
+           ->join('tax_orders','erporders.order_number','=','tax_orders.order_number')
+           ->where('clients.id',$id) ->selectRaw('SUM((price * quantity)+amount)as total')
+           ->pluck('total');
+           }
+            else{*/
+    $order = DB::table('erporders')
+           ->join('erporderitems','erporders.id','=','erporderitems.erporder_id')
+           ->join('clients','erporders.client_id','=','clients.id')           
+           ->where('clients.id',$client->id) ->selectRaw('SUM((price * quantity))- COALESCE(SUM(discount_amount),0)as total')
+           ->pluck('total');
+         /*}*/
+
+    $paid = DB::table('clients')
+           ->join('payments','clients.id','=','payments.client_id')
+           ->where('clients.id',$client->id) ->selectRaw('COALESCE(SUM(amount_paid),0) as due')
+           ->pluck('due');
+
+           $due= $order-$paid;
+
+?>
+
 
        <td td width='20'>{{$i}}</td>
-        <td> {{ $client->name }}</td>
-        <td> {{ $client->email }}</td>
+        <td> {{ $client->firstname.' '.$client->surname }}</td>
         <td> {{ $client->phone }}</td>
-        <td> {{ $client->address}}</td>
-        <td> {{ $client->contact_person }}</td>
-        <td> {{ $client->contact_person_email }}</td>
-        <td> {{ $client->contact_person_phone }}</td>
+        <td> {{ $client->address}}</td>       
         <td> {{ $client->type}}</td>
+        <td> {{ $due}}</td>
         </tr>
       <?php $i++; ?>
    
@@ -140,6 +169,12 @@ body {
 
    
 </div>
+
+<div align = "center" class='footer' style='margin-bottom:0px;'>
+
+<hr>
+<i>{{$organization->footnote1}}<br>
+ {{$organization->footnote2}}</i></div>
 
 
 </body>

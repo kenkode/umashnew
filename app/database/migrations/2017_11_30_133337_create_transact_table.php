@@ -18,7 +18,7 @@ class CreateTransactTable extends Migration {
 			$table->string('employee_id');
 			$table->foreign('employee_id')->references('personal_file_number')->on('employee')->onDelete('restrict')->onUpdate('cascade');
 			$table->integer('account_id')->unsigned();
-			$table->foreign('account_id')->references('id')->on('accounts');
+			$table->foreign('account_id')->references('id')->on('accounts')->onDelete('restrict')->onUpdate('cascade');
 			$table->string('basic_pay')->default('0.00');
 			$table->string('earning_amount')->default('0.00');
 			$table->string('taxable_income')->default('0.00');

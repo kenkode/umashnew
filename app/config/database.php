@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'umashcok_umash',
 			'username'  => 'root',
-			'password'  => 'mysql',
+			'password'  => '!QAZwsx2010 ',
 			'port' => '3306',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',

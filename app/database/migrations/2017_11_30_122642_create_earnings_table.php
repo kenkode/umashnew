@@ -17,7 +17,8 @@ class CreateEarningsTable extends Migration {
 			$table->increments('id');
 			$table->integer('employee_id')->unsigned();
 			$table->foreign('employee_id')->references('id')->on('employee')->onDelete('restrict')->onUpdate('cascade');
-            $table->string('earnings_name');
+            $table->integer('earning_id')->unsigned();
+            $table->foreign('earning_id')->references('id')->on('earningsettings')->onDelete('restrict')->onUpdate('cascade');
             $table->string('narrative');
             $table->string('formular');
             $table->integer('instalments')->default('0')->nullable();

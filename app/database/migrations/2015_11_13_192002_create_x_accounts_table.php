@@ -18,6 +18,7 @@ class CreateXAccountsTable extends Migration {
 			$table->string('category');
 			$table->integer('code');
 			$table->string('name');
+			$table->double('balance');
 			$table->boolean('active');
 			$table->timestamps();
 		});

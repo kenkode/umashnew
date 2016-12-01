@@ -238,4 +238,65 @@ class LeaveapplicationsController extends \BaseController {
 		return View::make('leaveapplications.cancelled', compact('leaveapplications'));
 	}
 
+	public function cssleaveapprove($id){
+
+		$leaveapplication = Leaveapplication::find($id);
+
+		
+
+		return View::make('css.employeeleave', compact('leaveapplication'));
+
+
+
+	}
+
+	public function supervisorapprove($id){
+
+	    $leaveapplication = Leaveapplication::findOrFail($id);
+
+	    $leaveapplication->is_supervisor_approved = 1;
+
+	    $leaveapplication->update();
+
+	    $emp = Employee::where('id',$leaveapplication->employee_id)->first();
+
+		$name = $emp->first_name.' '.$emp->middle_name.' '.$emp->last_name;
+
+
+		Mail::send( 'emails.supervisorconfirm', array('name'=>$name), function( $message ) use ($emp)
+		{
+    		
+    		$message->to($emp->email_office )->subject( 'Supervisor Approval' );
+		});
+
+		return Redirect::to('css/subordinateleave')->withFlashMessage('Successfully Approved subordinate leave!');
+
+
+	}
+
+	public function supervisorreject($id){
+
+	    $leaveapplication = Leaveapplication::findOrFail($id);
+
+	    $leaveapplication->is_supervisor_approved = 0;
+
+	    $leaveapplication->update();
+
+	    $emp = Employee::where('id',$leaveapplication->employee_id)->first();
+
+		$name = $emp->first_name.' '.$emp->middle_name.' '.$emp->last_name;
+
+
+		Mail::send( 'emails.supervisorreject', array('name'=>$name), function( $message ) use ($emp)
+		{
+    		
+    		$message->to($emp->email_office )->subject( 'Supervisor Approval' );
+		});
+
+		return Redirect::to('css/subordinateleave')->withFlashMessage('Successfully rejected subordinate leave!');
+
+
+	}
+
+
 }

@@ -5,7 +5,8 @@ Hello {{$name}},
 <p>Below is your self service login password: </p>
 <p><strong>{{$password}}</strong></p>
 <br>
-<p>Use your Payroll number as your username</p>
+<p>Use your email address as your username</p>
 <br><br>
 <p>Regards,</p>
-<p>Xpose Limited.</p>
+<?php $orgname=Organization::find(1)->pluck('name'); ?>
+<p>{{$orgname}}</p>

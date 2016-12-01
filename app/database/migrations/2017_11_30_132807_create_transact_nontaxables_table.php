@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransactDeductionsTable extends Migration {
+class CreateTransactNontaxablesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -34,7 +34,7 @@ class CreateTransactDeductionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('transact_deductions');
+		Schema::drop('transact_nontaxables');
 	}
 
 }

@@ -39,44 +39,45 @@ body {
   line-height: 1.428571429;
   color: #333;
   background-color: #fff;
-}
 
 
-
- @page { margin: 170px 30px; }
- .header { position: fixed; left: 0px; top: -150px; right: 0px; height: 150px;  text-align: center; }
+ @page { margin: 50px 30px; }
+ .header { position: top; left: 0px; top: -150px; right: 0px; height: 100px;  text-align: center; }
  .content {margin-top: -100px; margin-bottom: -150px}
- .footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 50px;  }
+ .footer { position: fixed; left: 0px; bottom: -30px; right: 0px; height: 50px;  }
  .footer .page:after { content: counter(page, upper-roman); }
 
 
 
+
+
 </style>
+
 
 </head>
 
 <body>
 
   <div class="header">
-     <table >
+       <table >
 
       <tr>
 
 
        
-        <td style="width:150px">
+       <td style="width:150px">
 
-            <img src="{{ '../images/logo.png' }}" alt="{{ $organization->logo }}" width="150px"/>
+            <img src="{{asset('public/uploads/logo/'.$organization->logo)}}" alt="logo" width="100%">
     
         </td>
 
         <td>
         <strong>
-          {{ strtoupper($organization->name)}}<br>
-          </strong>
-          {{ $organization->phone}} |
-          {{ $organization->email}} |
-          {{ $organization->website}}<br>
+          {{ strtoupper($organization->name)}}
+          </strong><br><p>
+          {{ $organization->phone}}<br><p> 
+          {{ $organization->email}}<br><p> 
+          {{ $organization->website}}<br><p>
           {{ $organization->address}}
        
 
@@ -104,7 +105,8 @@ body {
 
 
 	<div class="content" style='margin-top:0px;'>
-   <div align="center"><strong>Items Report</strong></div>
+   <!-- <div align="center"><strong>Items Report as at {{date('d-M-Y')}}</strong></div><br> -->
+   <div align="center"><strong>Items Report as from:  {{$from}} To:  {{$to}}</strong></div><br>
 
     <table class="table table-bordered" border='1' cellspacing='0' cellpadding='0'>
 
@@ -112,14 +114,14 @@ body {
         
 
 
-        <td width='20'><strong># </strong></td>
-        <td><strong>Tag Id </strong></td>
-        <td><strong>Name </strong></td>
-        <td><strong>Description </strong></td>
-        <td><strong>Purchase Price </strong></td>
-        <td><strong>Selling Price </strong></td>
-        <td><strong>Store Keeping Unit </strong></td>
-        <td><strong>Reorder Level </strong></td>
+        <th width='20'><strong># </strong></th>
+        <th><strong>Tag Id </strong></th>
+        <th><strong>Name </strong></th>
+        <th><strong>Description </strong></th>
+        <th><strong>Purchase Price </strong></th>
+        <th><strong>Selling Price </strong></th>
+        <th><strong>Store Keeping Unit </strong></th>
+        <th><strong>Reorder Level </strong></th>
       </tr>
       <?php $i =1; ?>
       @foreach($items as $item)
@@ -147,7 +149,11 @@ body {
 
    
 </div>
+<div align = "center" class='footer' style='margin-bottom:0px;'>
 
+<hr>
+<i>{{$organization->footnote1}}<br>
+ {{$organization->footnote2}}</i></div>
 
 </body>
 

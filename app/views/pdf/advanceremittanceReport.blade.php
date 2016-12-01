@@ -188,8 +188,12 @@ body {
         <td></td>
         @endif
 
-        @if($rem->bank_branch_id != 0) 
-        <td> {{ $rem->bank_branch_name }}</td>
+        @if($rem->bank_branch_id != 0)
+        <?php
+            $bb = BBranch::where('id',$rem->bank_branch_id)->first();
+            //$bankbranchname = $bb->bank_branch_name;
+        ?> 
+        <td> {{ $bb->bank_branch_name }}</td>
         @else
         <td></td>
         @endif

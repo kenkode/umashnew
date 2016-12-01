@@ -40,13 +40,12 @@ return array(
 		'administration' => 'Administration',
 		'payroll' => 'Payroll',
 		'erp' => 'ERP',
-		'leave' => 'Leave',
 		'cbs' => 'CBS',
 		'payroll_leave' => 'Payroll & Leave',
-		'employees' => 'Employees',
+		'employees' => 'HR',
 		'css' => 'Portal',
-		'inventory' => 'Inventory',
-		
+		'morgue' => 'Morgue',
+		'leave' => 'Leave',
 
 		),
 	

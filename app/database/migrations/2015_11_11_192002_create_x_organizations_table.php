@@ -28,6 +28,8 @@ class CreateXOrganizationsTable extends Migration {
 			$table->integer('bank_branch_id')->unsigned()->default('0')->index('organization_bank_branch_id_foreign');
 			$table->string('bank_account_number')->nullable();
 			$table->string('swift_code')->nullable();
+			$table->string('footnote1')->nullable();
+			$table->string('footnote2')->nullable();
 			$table->string('license_type')->nullable()->default('evaluation');
 			$table->string('license_code')->nullable();
 			$table->string('license_key')->nullable();

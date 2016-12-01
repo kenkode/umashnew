@@ -1,6 +1,7 @@
+
 <style type="text/css">
 #wrap{
-    margin-top: 90px !important;
+    margin-top: 50px !important;
     position: fixed;
     top: 0;
     z-index: 10000;
@@ -23,29 +24,40 @@
                     <a href="{{ URL::to('items') }}"><i class="glyphicon glyphicon-barcode fa-fw"></i> Items</a>
                   </li>
 
-
                   <li>
-                    <a href="{{ URL::to('itemcategories') }}"><i class="glyphicon glyphicon-tasks fa-fw"></i> Item Categories</a>
+                    <a href="{{ URL::to('customers') }}"><i class="glyphicon glyphicon-user fa-fw"></i> Customers</a>
                   </li>
 
                   <li>
-                    <a href="{{ URL::to('clients') }}"><i class="fa fa-group fa-fw"></i> Clients</a>
-                  </li>
+                    <a href="{{ URL::to('suppliers') }}"><i class="glyphicon glyphicon-user fa-fw"></i> Supplier</a>
+                  </li>  
 
-                   
+                  <li>
+                    <a href="{{ URL::to('expenses') }}"><i class="glyphicon glyphicon-list fa-fw"></i> Expenses</a>
+                  </li> 
                
                   <li>
-                    <a href="{{ URL::to('salesorders') }}"><i class="glyphicon glyphicon-list fa-fw"></i> Quotations</a>
+                    <a href="{{ URL::to('salesorders') }}"><i class="glyphicon glyphicon-list fa-fw"></i> Sales Orders</a>
                   </li>
                         
-                  
                   <li>
-                    <a href="{{ URL::to('bookings') }}"><i class="glyphicon glyphicon-th fa-fw"></i> Bookings</a>
+                    <a href="{{ URL::to('purchaseorders') }}"><i class="glyphicon glyphicon-list fa-fw"></i>  Purchase Orders</a>
                   </li>
 
-
                   <li>
-                    <a href="{{ URL::to('maintenances') }}"><i class="glyphicon glyphicon-th-large fa-fw"></i> Maintenance</a>
+                    <a href="{{ URL::to('quotationorders') }}"><i class="glyphicon glyphicon-list fa-fw"></i> Quotation</a>
+                  </li>
+                
+                 <!--  <li>
+                    <a href="{{ URL::to('account') }}"><i class="fa fa-tasks fa-fw"></i>  Accounts</a>
+                  </li> -->
+                  
+                  <li>
+                    <a href="{{ URL::to('paymentmethods') }}"><i class="fa fa-tasks fa-fw"></i>  Payment Methods</a>
+                  </li>
+                        
+                  <li>
+                    <a href="{{ URL::to('payments') }}"><i class="glyphicon glyphicon-list fa-fw"></i>  Payments</a>
                   </li>
                 
                   <li>
@@ -56,15 +68,13 @@
                     <a href="{{ URL::to('locations') }}"><i class="glyphicon glyphicon-home fa-fw"></i>  Stores</a>
                   </li>   
 
-
                   <li>
-                    <a href="{{ URL::to('erpreports') }}"><i class="glyphicon glyphicon-folder-open fa-fw"></i>  Reports</a>
+                    <a href="{{ URL::to('taxes') }}"><i class="glyphicon glyphicon-list fa-fw"></i> Taxes</a>
                   </li> 
 
-
                   <li>
-                    <a href="{{ URL::to('erpmigrate') }}"><i class="glyphicon glyphicon-upload fa-fw"></i>  Migrate</a>
-                  </li>    
+                    <a href="{{ URL::to('erpReports') }}"><i class="glyphicon glyphicon-folder-open fa-fw"></i>  Reports</a>
+                  </li>   
 
 
                     

@@ -1,0 +1,1 @@
+/var/www/html/umash/app/views/resolutions/show.blade.php

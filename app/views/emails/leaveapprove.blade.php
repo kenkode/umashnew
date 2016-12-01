@@ -41,4 +41,5 @@ Hello {{$name}},
 
 <br><br>
 <p>Regards,</p>
-<p>Xpose Limited.</p>
+<?php $orgname=Organization::find(1)->pluck('name'); ?>
+<p>{{$orgname}}</p>

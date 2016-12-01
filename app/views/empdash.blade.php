@@ -6,11 +6,14 @@
 
 
 <br><br>
-
-@if (Session::get('notice'))
-            <div class="alert alert-info">{{ Session::get('notice') }}</div>
-        @endif
-    
+ @if(Session::get('notice')))
+            <div class="alert alert-info alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ Session::get('notice') }}</strong> 
+          </div>      
+@endif
                     <div class="row">
                       
                         <div>
@@ -67,7 +70,7 @@
            @if($employee->citizenship !=  null )
            <tr>
             <td>Citizenship</td>
-            <td>{{$employee->citizenship}}</td>
+            <td>{{$citizenship_name}}</td>
           </tr>
           @endif
 
@@ -86,7 +89,20 @@
           </tr>
           @endif
 
+          <?php if(count($supervisor) == 0){?>
+          <tr>
+            <td>Supervisor</td>
+            <td>None</td>
+          </tr>
+         <?php }else{
+            $sup = Employee::find($supervisor->supervisor_id);
+            ?>
+          <tr>
+            <td>Supervisor</td>
+            <td>{{$sup->first_name.' '.$sup->middle_name.' '.$sup->last_name}}</td>
+          </tr>
 
+          <?php } ?>
          
           
           
@@ -135,7 +151,8 @@
             <td>NHIF Number</td>
             <td>{{$employee->hospital_insurance_number}}</td>
           </tr>
-
+          
+          
 
       </table>
 

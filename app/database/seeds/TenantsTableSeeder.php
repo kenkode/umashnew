@@ -327,6 +327,10 @@ class TenantsTableSeeder extends Seeder {
         $nontax->organization_id = 1;
         $nontax->save();
 
+         $mail = new Mailsender;
+         $mail->driver = 'smtp';
+         $mail->save();
+
         DB::table('job_group')->insert(array(
             array('job_group_name' => 'Junior Staff','organization_id' => '1'),
             array('job_group_name' => 'Management','organization_id' => '1'),
@@ -369,15 +373,6 @@ class TenantsTableSeeder extends Seeder {
             array('income_from' => '90000.00', 'income_to' => '99999.00', 'hi_amount' => '1600.00', 'organization_id' => '1'),
             array('income_from' => '100000.00', 'income_to' => '99000000.00', 'hi_amount' => '1700.00', 'organization_id' => '1'),
         ));
-
-
-		$share = new Share;
-
-
-		$share->value = 0;
-		$share->transfer_charge = 0;
-		$share->charged_on = 'donor';
-		$share->save();
 
 
 

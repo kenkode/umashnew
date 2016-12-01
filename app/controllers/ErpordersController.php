@@ -40,8 +40,11 @@ class ErpordersController extends \BaseController {
 
 		Erporder::create($data);
 
+		   			
+
 		return Redirect::route('erporders.index');
 	}
+}
 
 	/**
 	 * Display the specified erporder.

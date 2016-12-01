@@ -1,4 +1,4 @@
-@extends('layouts.leave')
+@extends('layouts.main')
 
 {{HTML::script('media/jquery-1.8.0.min.js') }}
 

@@ -13,7 +13,11 @@ class StocksController extends \BaseController {
 
 		$items = Item::all();
 
-		return View::make('stocks.index', compact('stocks', 'items'));
+		$stock_in = DB::table('stocks')
+         ->join('items', 'stocks.item_id', '=', 'items.id')
+         ->get();
+
+		return View::make('stocks.index', compact('stocks', 'items','stock_in'));
 	}
 
 	/**
@@ -44,8 +48,7 @@ class StocksController extends \BaseController {
 		}
 
 		$item_id = Input::get('item');
-		$location_id = Input::get('location');
-
+		$location_id = Input::get('location');		
 		$item = Item::findOrFail($item_id);
 		$location = Location::find($location_id);
 		$quantity = Input::get('quantity');

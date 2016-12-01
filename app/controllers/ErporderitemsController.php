@@ -40,6 +40,7 @@ class ErporderitemsController extends \BaseController {
 
 		Erporderitem::create($data);
 
+		
 		return Redirect::route('erporderitems.index');
 	}
 

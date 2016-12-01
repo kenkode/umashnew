@@ -23,6 +23,8 @@
     <li role="presentation"><a href="#advance" aria-controls="advance" role="tab" data-toggle="tab">Salary Advance Reports</a></li>
     <li role="presentation"><a href="#payroll" aria-controls="payroll" role="tab" data-toggle="tab">Payroll Reports</a></li>
     <li role="presentation"><a href="#statutory" aria-controls="statutory" role="tab" data-toggle="tab">Statutory Reports</a></li>
+    <li role="presentation"><a href="#erp" aria-controls="erp" role="tab" data-toggle="tab">ERP Reports</a></li>
+    <li role="presentation"><a href="#morgue" aria-controls="morgue" role="tab" data-toggle="tab">Morgue Reports</a></li>
     
   </ul>
 
@@ -182,6 +184,95 @@
     </ul>
 
   </div>
+
+  <div role="tabpanel" class="tab-pane" id="erp">
+    <br>
+    <ul>
+
+       <li>
+            <a href="{{ URL::to('erpReports/selectSalesPeriod') }}">Sales</a>
+       </li>
+        <li>
+           <a href="{{ URL::to('erpReports/sales_summary') }}" target="_blank"> Sales Summary</a>
+          </li> 
+
+       <li>
+            <a href="{{ URL::to('erpReports/selectPurchasesPeriod') }}">Purchases</a>
+       </li>
+
+       <li>
+            <a href="{{ URL::to('erpReports/selectClientsPeriod') }}">Clients</a>
+       </li>
+
+       <li>
+          <a href="{{ URL::to('erpReports/selectItemsPeriod') }}">Items</a>
+       </li>
+
+       <li>
+          <a href="{{ URL::to('erpReports/selectExpensesPeriod') }}">Expenses</a>
+       </li>
+    
+       <li>
+          <a target="blank" href="{{ URL::to('erpReports/paymentmethods') }}">Payment Methods</a>
+       </li>  
+
+       <li>
+         <a href="{{ URL::to('erpReports/payments') }}" target="_blank">Payments</a>     
+       </li>
+
+        <li>
+         <a href="{{ URL::to('erpReports/locations') }}" target="_blank">Stores</a>     
+       </li> 
+
+        <li>
+         <a href="{{ URL::to('erpReports/selectStockPeriod') }}">Stock report </a>     
+       </li> 
+
+
+        <li>
+         <a href="{{ URL::to('erpReports/pricelist') }}" target="_blank">Price List </a>     
+       </li>
+
+        <li>
+         <a href="{{ URL::to('erpReports/accounts') }}" target="_blank">Account Balances </a>     
+       </li>  
+
+    </ul>
+
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="morgue">
+    <br>
+    <ul>
+
+       <li>
+            <a href="{{ URL::to('umashreports/selectEnquiryPeriod') }}">Enquiries</a>
+       </li>      
+
+       <li>
+            <a href="{{ URL::to('umashreports/selectAdmissionPeriod') }}">Admissions</a>
+       </li>
+
+        <li>
+            <a href="{{ URL::to('umashreports/selectBookingPeriod') }}">Bookings</a>
+       </li>
+       
+       <li>
+            <a href="{{ URL::to('umashreports/selectCarPeriod') }}">Cars</a>
+       </li>
+
+        <li>
+            <a href="{{ URL::to('umashreports/selectDriverPeriod') }}">Drivers</a>
+       </li>    
+
+       <li>
+            <a href="{{ URL::to('umashreports/selectJinsurancePeriod') }}">Jubilee Insurance</a>
+       </li> 
+
+    </ul>
+
+  </div>
+
 
 </div>
 

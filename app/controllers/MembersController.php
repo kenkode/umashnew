@@ -315,10 +315,9 @@ $name = $employee->first_name.' '.$employee->last_name;
 		
 		if($email != null){
 
+                if(Mailsender::checkConnection() == false){
 
-			if(Mailsender::checkConnection() == false){
-
-				return Redirect::back()->with('notice', 'Employee has not been activated. Could not establish interenet connection. kindly check your mail settings');
+				return Redirect::back()->with('notice', 'Employee has not been activated. Could not establish internet connection. kindly check your mail settings');
 			}
 
 		DB::table('users')->insert(
@@ -331,11 +330,10 @@ $name = $employee->first_name.' '.$employee->last_name;
 		)
 );
 
-		
+    $employee->is_css_active = true;
+    $employee->update();
 
-
-
-
+	
 
 	Mail::queue( 'emails.password', array('password'=>$password, 'name'=>$name), function( $message ) use ($employee)
 {
@@ -411,8 +409,11 @@ else{
 	public function reset($id){
 		
 		//$id = DB::table('members')->where('membership_no', '=', $mem)->pluck('id');
-		$member = Member::findOrFail($id);
+		$member = Member::where('id',$id)->first();
 		
+		if(empty($member)){
+			return Redirect::back()->withAlert('Records not found');
+		}else{
 		$user_id = DB::table('users')->where('username', '=', $member->membership_no)->pluck('id');
 		
 		$user = User::findOrFail($user_id);
@@ -421,6 +422,7 @@ else{
 		$user->update();
 		
 		return Redirect::back();
+		}		
 		
 	}
 

@@ -1177,6 +1177,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_allowances.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(allowance_amount),0.00) as allowance_amount,allowance_name'))
             ->groupBy('allowance_name')
             ->get(); 
 
@@ -1184,6 +1185,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_nontaxables.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(nontaxable_amount),0.00) as nontaxable_amount,nontaxable_name'))
             ->groupBy('nontaxable_name')
             ->get(); 
 
@@ -1191,6 +1193,8 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_earnings.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(earning_amount),0.00) as earning_amount,earning_name'))
+            
             ->groupBy('earning_name')
             ->get(); 
 
@@ -1198,6 +1202,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_deductions.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(deduction_amount),0.00) as deduction_amount,deduction_name'))
             ->groupBy('deduction_name')
             ->get(); 
 
@@ -1205,6 +1210,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_overtimes.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(overtime_period),0.00) as overtime_period,COALESCE(sum(overtime_amount),0.00) as overtime_amount,overtime_type'))
             ->groupBy('overtime_type')
             ->get();
 
@@ -1212,6 +1218,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_reliefs.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(relief_amount),0.00) as relief_amount,relief_name'))
             ->groupBy('relief_name')
             ->get();
 
@@ -1659,24 +1666,29 @@ class ReportsController extends \BaseController {
             ->where('employee.id' ,'=', Input::get('employeeid'))
             ->first(); 
 
-         $nontaxables = DB::table('transact_nontaxables')
-            ->join('employee', 'transact_nontaxables.employee_id', '=', 'employee.id')
-            ->where('financial_month_year' ,'=', Input::get('period'))
-            ->where('employee.id' ,'=', Input::get('employeeid'))
-            ->groupBy('nontaxable_name')
-            ->get(); 
 
         $allws = DB::table('transact_allowances')
             ->join('employee', 'transact_allowances.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(allowance_amount),0.00) as allowance_amount,allowance_name'))
             ->groupBy('allowance_name')
+            ->get(); 
+
+        $nontaxables = DB::table('transact_nontaxables')
+            ->join('employee', 'transact_nontaxables.employee_id', '=', 'employee.id')
+            ->where('financial_month_year' ,'=', Input::get('period'))
+            ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(nontaxable_amount),0.00) as nontaxable_amount,nontaxable_name'))
+            ->groupBy('nontaxable_name')
             ->get(); 
 
         $earnings = DB::table('transact_earnings')
             ->join('employee', 'transact_earnings.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(earning_amount),0.00) as earning_amount,earning_name'))
+            
             ->groupBy('earning_name')
             ->get(); 
 
@@ -1684,6 +1696,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_deductions.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(deduction_amount),0.00) as deduction_amount,deduction_name'))
             ->groupBy('deduction_name')
             ->get(); 
 
@@ -1691,6 +1704,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_overtimes.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(overtime_period),0.00) as overtime_period,COALESCE(sum(overtime_amount),0.00) as overtime_amount,overtime_type'))
             ->groupBy('overtime_type')
             ->get();
 
@@ -1698,6 +1712,7 @@ class ReportsController extends \BaseController {
             ->join('employee', 'transact_reliefs.employee_id', '=', 'employee.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.id' ,'=', Input::get('employeeid'))
+            ->select(DB::raw('COALESCE(sum(relief_amount),0.00) as relief_amount,relief_name'))
             ->groupBy('relief_name')
             ->get();
  
@@ -1707,7 +1722,7 @@ class ReportsController extends \BaseController {
 
     $organization = Organization::find(1);
 
-    $pdf = PDF::loadView('pdf.monthlySlip', compact('nontaxables','empall','select','name','employee','transact','allws','deds','earnings','overtimes','rels','period','currency', 'organization','id'))->setPaper('a5')->setOrientation('potrait');
+    $pdf = PDF::loadView('pdf.monthlySlip', compact('nontaxables','empall','select','name','employee','transact','allws','deds','earnings','overtimes','rels','period','currency', 'organization','id'))->setPaper('A5')->setOrientation('potrait');
   
     return $pdf->stream($employee->personal_file_number.'_'.$employee->first_name.'_'.$employee->last_name.'_'.$month.'.pdf');
     }
@@ -5121,6 +5136,14 @@ class ReportsController extends \BaseController {
 		return View::make('pdf.remittanceSelect',compact('branches','depts'));
 	}
 
+  public function process_rem($period)
+  {
+    $branches = Branch::all();
+    $depts = Department::all();
+    $period = $period;
+    return View::make('pdf.remittanceprocessSelect',compact('branches','depts','period'));
+  }
+
     public function payeRems(){
 
         if(Input::get('format') == "excel"){
@@ -5129,7 +5152,6 @@ class ReportsController extends \BaseController {
         ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
         ->where('mode_of_payment' ,'=', 'Bank')
         ->where('bank_id' ,'>', 0)
-        ->where('bank_branch_id' ,'>', 0)
         ->whereNotNull('bank_account_number')
         ->where('financial_month_year' ,'=', Input::get('period'))
         ->sum('net');
@@ -5137,10 +5159,8 @@ class ReportsController extends \BaseController {
         $data = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('employee.bank_id' ,'>', 0)
-            ->where('employee.bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get(); 
@@ -5323,7 +5343,8 @@ class ReportsController extends \BaseController {
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -5332,7 +5353,7 @@ class ReportsController extends \BaseController {
                $name=$data[$i]->first_name.' '.$data[$i]->middle_name.' '.$data[$i]->last_name;
              }
              $sheet->row($row, array(
-             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,round($data[$i]->bank_account_number,0),$data[$i]->swift_code,$data[$i]->net
+             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,$data[$i]->bank_account_number,$data[$i]->swift_code,$data[$i]->net
              ));
 
              $sheet->cell('H'.$row, function($cell) {
@@ -5352,6 +5373,14 @@ class ReportsController extends \BaseController {
                 $cell->setAlignment('left');
 
               });
+
+              $sheet->setColumnFormat(array(
+              'F13' => '0',
+              ));
+
+             $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
+              );
              
              $row++;
              
@@ -5388,7 +5417,6 @@ class ReportsController extends \BaseController {
           ->where('branch_id' ,'=', Input::get('branch'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->sum('net');
@@ -5396,11 +5424,9 @@ class ReportsController extends \BaseController {
         $data = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('mode_of_payment' ,'=', 'Bank')
-            ->where('bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
+            ->where('employee.bank_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get(); 
@@ -5584,7 +5610,8 @@ class ReportsController extends \BaseController {
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -5594,7 +5621,7 @@ class ReportsController extends \BaseController {
              }
 
              $sheet->row($row, array(
-             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,round($data[$i]->bank_account_number,0),$data[$i]->swift_code,$data[$i]->net
+             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,$data[$i]->bank_account_number,$data[$i]->swift_code,$data[$i]->net
              ));
 
              $sheet->setColumnFormat(array(
@@ -5607,6 +5634,14 @@ class ReportsController extends \BaseController {
                 $cell->setAlignment('left');
 
               });
+
+              $sheet->setColumnFormat(array(
+              'F13' => '0',
+              ));
+
+             $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
+              );
 
              $sheet->cell('H'.$row, function($cell) {
 
@@ -5649,7 +5684,6 @@ class ReportsController extends \BaseController {
           ->where('department_id' ,'=', Input::get('department'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->sum('net');
@@ -5657,11 +5691,9 @@ class ReportsController extends \BaseController {
         $data = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('department_id' ,'=', Input::get('department'))
             ->where('mode_of_payment' ,'=', 'Bank')
-            ->where('bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
+            ->where('employee.bank_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get(); 
@@ -5846,7 +5878,8 @@ class ReportsController extends \BaseController {
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -5856,7 +5889,7 @@ class ReportsController extends \BaseController {
              }
 
              $sheet->row($row, array(
-             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,round($data[$i]->bank_account_number,0),$data[$i]->swift_code,$data[$i]->net
+             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,$data[$i]->bank_account_number,$data[$i]->swift_code,$data[$i]->net
              ));
              
              $sheet->setColumnFormat(array(
@@ -5864,7 +5897,7 @@ class ReportsController extends \BaseController {
               ));
 
              $sheet->setColumnFormat(array(
-              'F13'.$row => '0',
+              'F13' => '0',
               ));
 
               $sheet->cell('F'.$row, function($cell) {
@@ -5873,6 +5906,14 @@ class ReportsController extends \BaseController {
                 $cell->setAlignment('left');
 
               });
+
+              $sheet->setColumnFormat(array(
+              'F13' => '0',
+              ));
+
+             $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
+              );
 
              $sheet->cell('H'.$row, function($cell) {
 
@@ -5916,7 +5957,6 @@ class ReportsController extends \BaseController {
           ->where('department_id' ,'=', Input::get('department'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->sum('net');
@@ -5924,12 +5964,10 @@ class ReportsController extends \BaseController {
         $data = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('department_id' ,'=', Input::get('department'))
             ->where('mode_of_payment' ,'=', 'Bank')
-            ->where('bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
+            ->where('employee.bank_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get();
@@ -6069,7 +6107,7 @@ class ReportsController extends \BaseController {
               $sheet->mergeCells('A8:H8');
 
               $sheet->row(8, array(
-              'SALARY ADVANCE TRANSFER LETTER'
+              'BANK TRANSFER LETTER'
               ));
 
               $sheet->row(8, function ($r) {
@@ -6114,7 +6152,8 @@ class ReportsController extends \BaseController {
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -6123,7 +6162,7 @@ class ReportsController extends \BaseController {
                $name=$data[$i]->first_name.' '.$data[$i]->middle_name.' '.$data[$i]->last_name;
              }
              $sheet->row($row, array(
-             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,round($data[$i]->bank_account_number,0),$data[$i]->swift_code,$data[$i]->net
+             $data[$i]->personal_file_number,$name,$data[$i]->identity_number,$bankname,$bankbranchname,$data[$i]->bank_account_number,$data[$i]->swift_code,$data[$i]->net
              ));
 
              $sheet->setColumnFormat(array(
@@ -6131,8 +6170,12 @@ class ReportsController extends \BaseController {
               ));
 
               $sheet->setColumnFormat(array(
-              'F13'.$row => '0',
+              'F13' => '0',
               ));
+
+             $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
+              );
 
               $sheet->cell('F'.$row, function($cell) {
 
@@ -6188,7 +6231,6 @@ class ReportsController extends \BaseController {
           ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('employee.bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->where('financial_month_year' ,'=', Input::get('period'))
 		      ->sum('net');
@@ -6200,10 +6242,8 @@ class ReportsController extends \BaseController {
         $rems = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get(); 
@@ -6244,7 +6284,6 @@ class ReportsController extends \BaseController {
           ->where('branch_id' ,'=', Input::get('branch'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('employee.bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->where('financial_month_year' ,'=', Input::get('period'))
 		      ->sum('net');
@@ -6256,11 +6295,9 @@ class ReportsController extends \BaseController {
 		$rems = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get(); 
@@ -6299,7 +6336,6 @@ class ReportsController extends \BaseController {
           ->where('department_id' ,'=', Input::get('department'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('employee.bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->where('financial_month_year' ,'=', Input::get('period'))
 		      ->sum('net');
@@ -6311,11 +6347,9 @@ class ReportsController extends \BaseController {
 		$rems = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('department_id' ,'=', Input::get('department'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get(); 
@@ -6355,7 +6389,6 @@ class ReportsController extends \BaseController {
           ->where('department_id' ,'=', Input::get('department'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('employee.bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->where('financial_month_year' ,'=', Input::get('period'))
 		  ->sum('net');
@@ -6367,12 +6400,10 @@ class ReportsController extends \BaseController {
 		$rems = DB::table('transact')
             ->join('employee', 'transact.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.banK_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('department_id' ,'=', Input::get('department'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->get(); 
@@ -6417,6 +6448,14 @@ class ReportsController extends \BaseController {
 		$depts = Department::all();
 		return View::make('pdf.summarySelect',compact('branches','depts'));
 	}
+
+  public function process_summary($period)
+  {
+    $branches = Branch::all();
+    $depts = Department::all();
+    $period = $period;
+    return View::make('pdf.summaryprocessSelect',compact('branches','depts','period'));
+  }
 
     public function paySummary(){
 		
@@ -9831,18 +9870,15 @@ public function period_advrem()
         ->where('financial_month_year' ,'=', Input::get('period'))
         ->where('mode_of_payment' ,'=', 'Bank')
         ->where('bank_id' ,'>', 0)
-        ->where('bank_branch_id' ,'>', 0)
         ->whereNotNull('bank_account_number')
         ->sum('amount');
 
         $data = DB::table('transact_advances')
             ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.bank_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get(); 
 
@@ -10027,7 +10063,8 @@ public function period_advrem()
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -10051,8 +10088,17 @@ public function period_advrem()
               'F' => '0',
               ));
 
+             $sheet->setColumnFormat(array(
+              'F13' => '0',
+              ));
+
+             $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
+              );
+
+
              $sheet->getStyle('F')->getAlignment()->applyFromArray(
-               array('horizontal' => 'center')
+               array('horizontal' => 'left')
               );
 
              $sheet->cell('B3', function($cell) {
@@ -10099,19 +10145,16 @@ public function period_advrem()
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->sum('amount');
 
         $data = DB::table('transact_advances')
             ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.bank_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get(); 
 
@@ -10296,7 +10339,8 @@ public function period_advrem()
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -10313,8 +10357,16 @@ public function period_advrem()
               'F' => '0',
               ));
 
+             $sheet->setColumnFormat(array(
+              'F13' => '0',
+              ));
+
              $sheet->getStyle('F')->getAlignment()->applyFromArray(
                array('horizontal' => 'center')
+              );
+
+              $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
               );
 
             
@@ -10357,12 +10409,10 @@ public function period_advrem()
           $total = DB::table('transact_advances')
           ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
           ->join('banks', 'employee.bank_id', '=', 'banks.id')
-          ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
           ->where('department_id' ,'=', Input::get('department'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->where('employee.bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->sum('amount');
 
@@ -10372,7 +10422,6 @@ public function period_advrem()
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get(); 
 
@@ -10556,7 +10605,8 @@ public function period_advrem()
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -10572,6 +10622,14 @@ public function period_advrem()
              $sheet->setColumnFormat(array(
               'F' => '0',
               ));
+
+             $sheet->setColumnFormat(array(
+              'F13' => '0',
+              ));
+
+             $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
+              );
 
              $sheet->getStyle('F')->getAlignment()->applyFromArray(
                array('horizontal' => 'center')
@@ -10620,20 +10678,17 @@ public function period_advrem()
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->sum('amount');
         
         $data = DB::table('transact_advances')
             ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.bank_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('department_id' ,'=', Input::get('department'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get();
 
@@ -10825,7 +10880,8 @@ public function period_advrem()
             if($data[$i]->bank_branch_id==0){
             $bankbranchname = '';
             }else{
-            $bankbranchname = $data[$i]->bank_branch_name;
+            $bb = BBranch::where('id',$data[$i]->bank_branch_id)->first();
+            $bankbranchname = $bb->bank_branch_name;
             }
 
             if($data[$i]->middle_name == '' || $data[$i]->middle_name == null){
@@ -10847,6 +10903,14 @@ public function period_advrem()
              $sheet->setColumnFormat(array(
               'F' => '0',
               ));
+
+             $sheet->setColumnFormat(array(
+              'F13' => '0',
+              ));
+
+             $sheet->getStyle('F13')->getAlignment()->applyFromArray(
+               array('horizontal' => 'left')
+              );
 
              $sheet->getStyle('F')->getAlignment()->applyFromArray(
                array('horizontal' => 'center')
@@ -10892,7 +10956,6 @@ public function period_advrem()
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->sum('amount');
 
@@ -10903,11 +10966,9 @@ public function period_advrem()
         $rems = DB::table('transact_advances')
             ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.bank_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get(); 
 
@@ -10946,7 +11007,6 @@ public function period_advrem()
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->sum('amount');
 
@@ -10957,12 +11017,10 @@ public function period_advrem()
         $rems = DB::table('transact_advances')
             ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.bank_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get(); 
 
@@ -10998,11 +11056,11 @@ public function period_advrem()
         } else if(Input::get('branch') == 'All'){
           $total = DB::table('transact_advances')
           ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
+          ->join('banks', 'employee.bank_id', '=', 'banks.id')
           ->where('department_id' ,'=', Input::get('department'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->sum('amount');
 
@@ -11012,11 +11070,11 @@ public function period_advrem()
 
         $rems = DB::table('transact_advances')
             ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
+            ->join('banks', 'employee.bank_id', '=', 'banks.id')
             ->where('department_id' ,'=', Input::get('department'))
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get(); 
 
@@ -11051,12 +11109,12 @@ public function period_advrem()
         } else if(Input::get('branch') != 'All' && Input::get('department') != 'All'){
           $total = DB::table('transact_advances')
           ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
+          ->join('banks', 'employee.bank_id', '=', 'banks.id')
           ->where('branch_id' ,'=', Input::get('branch'))
           ->where('department_id' ,'=', Input::get('department'))
           ->where('mode_of_payment' ,'=', 'Bank')
           ->where('financial_month_year' ,'=', Input::get('period'))
           ->where('bank_id' ,'>', 0)
-          ->where('bank_branch_id' ,'>', 0)
           ->whereNotNull('bank_account_number')
           ->sum('amount');
 
@@ -11067,13 +11125,11 @@ public function period_advrem()
         $rems = DB::table('transact_advances')
             ->join('employee', 'transact_advances.employee_id', '=', 'employee.personal_file_number')
             ->join('banks', 'employee.bank_id', '=', 'banks.id')
-            ->join('bank_branches', 'employee.bank_branch_id', '=', 'bank_branches.id')
             ->where('branch_id' ,'=', Input::get('branch'))
             ->where('department_id' ,'=', Input::get('department'))
             ->where('mode_of_payment' ,'=', 'Bank')
             ->where('financial_month_year' ,'=', Input::get('period'))
             ->where('employee.bank_id' ,'>', 0)
-            ->where('bank_branch_id' ,'>', 0)
             ->whereNotNull('bank_account_number')
             ->get(); 
 

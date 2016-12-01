@@ -39,45 +39,45 @@ body {
   line-height: 1.428571429;
   color: #333;
   background-color: #fff;
-}
 
 
-
- @page { margin: 170px 30px; }
- .header { position: fixed; left: 0px; top: -150px; right: 0px; height: 150px;  text-align: center; }
+ @page { margin: 50px 30px; }
+ .header { position: top; left: 0px; top: -150px; right: 0px; height: 100px;  text-align: center; }
  .content {margin-top: -100px; margin-bottom: -150px}
- .footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 50px;  }
+ .footer { position: fixed; left: 0px; bottom: -30px; right: 0px; height: 50px;  }
  .footer .page:after { content: counter(page, upper-roman); }
 
 
 
+
+
 </style>
+
 
 </head>
 
 <body>
 
   <div class="header">
-     <table >
+       <table >
 
       <tr>
 
 
        
-        <td style="width:150px">
+      <td style="width:150px">
 
-            <img src="{{ '../images/logo.png' }}" alt="{{ $organization->logo }}" width="150px"/>
+            <img src="{{asset('public/uploads/logo/'.$organization->logo)}}" alt="logo" width="100%">
     
         </td>
-        <td>&nbsp;</td>
 
         <td>
         <strong>
-          {{ strtoupper($organization->name)}}<br>
-          </strong>
-          {{ $organization->phone}} |
-          {{ $organization->email}} |
-          {{ $organization->website}}<br>
+          {{ strtoupper($organization->name)}}
+          </strong><br><p>
+          {{ $organization->phone}}<br><p> 
+          {{ $organization->email}}<br><p> 
+          {{ $organization->website}}<br><p>
           {{ $organization->address}}
        
 
@@ -105,7 +105,7 @@ body {
 
 
 	<div class="content" style='margin-top:0px;'>
-   <div align="center"><strong>Stores List Report as at {{date('d-M-Y')}}</strong></div>
+   <div align="center"><strong>Stores List Report as at {{date('d-M-Y')}}</strong></div><br>
 
    <hr>
 
@@ -115,9 +115,9 @@ body {
         
 
 
-        <td width='20'><strong># </strong></td>
-        <td><strong>Store Name</strong></td>
-        <td><strong>Description </strong></td>
+        <th width='20'><strong># </strong></th>
+        <th><strong>Store Name</strong></th>
+        <th><strong>Description </strong></th>
         
       </tr>
       <?php $i =1; ?>
@@ -142,7 +142,11 @@ body {
 
    
 </div>
+<div align = "center" class='footer' style='margin-bottom:0px;'>
 
+<hr>
+<i>{{$organization->footnote1}}<br>
+ {{$organization->footnote2}}</i></div>
 
 </body>
 

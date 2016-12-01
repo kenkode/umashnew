@@ -28,7 +28,7 @@ hr {
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 1.428571429;
   color: #333;
   background-color: #fff;

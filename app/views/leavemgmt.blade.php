@@ -1,4 +1,4 @@
-@extends('layouts.leave')
+@extends('layouts.main')
 @section('content')
 
 <br><br>
@@ -69,10 +69,12 @@
 <td>{{Leaveapplication::getBalanceDays($leaveapplication->employee, $leaveapplication->leavetype)}}</td>
           <td>
            <a href="{{URL::to('leaveapplications/edit/'.$leaveapplication->id)}}">Amend</a> &nbsp; |
+            @if($leaveapplication->is_supervisor_approved == 1)
            @if(Leaveapplication::getBalanceDays($leaveapplication->employee, $leaveapplication->leavetype) >= Leaveapplication::getLeaveDays($leaveapplication->applied_end_date,$leaveapplication->applied_start_date))
           <a href="{{URL::to('leaveapplications/approve/'.$leaveapplication->id)}}">Approve</a> &nbsp;
           @endif
           |&nbsp;<a href="{{URL::to('leaveapplications/reject/'.$leaveapplication->id)}}">Reject</a> &nbsp;|
+          @endif
           <a href="{{URL::to('leaveapplications/cancel/'.$leaveapplication->id)}}">Cancel</a>
           </td>
 

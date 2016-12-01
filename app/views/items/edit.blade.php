@@ -3,7 +3,7 @@
 
 <br><div class="row">
     <div class="col-lg-12">
-  <h3>Update Item</h3>
+  <h4>Update Item</h4>
 
 <hr>
 </div>  
@@ -28,7 +28,7 @@
     <fieldset>
         <div class="form-group">
             <label for="username">Item Name <span style="color:red">*</span> :</label>
-            <input class="form-control" placeholder="" type="text" name="name" id="name" value="{{$item->name}}">
+            <input class="form-control" placeholder="" type="text" name="name" id="name" value="{{$item->name}}" required>
         </div>
 
          <div class="form-group">
@@ -38,33 +38,12 @@
 
         <div class="form-group">
             <label for="username">Purchase Price <span style="color:red">*</span> :</label>
-            <input class="form-control" placeholder="" type="text" name="pprice" id="pprice" value="{{$item->purchase_price}}">
+            <input class="form-control" placeholder="" type="text" name="pprice" id="pprice" value="{{$item->purchase_price}}" required>
         </div>
 
         <div class="form-group">
             <label for="username">Selling price <span style="color:red">*</span> :</label>
-            <input class="form-control" placeholder="" type="text" name="sprice" id="sprice" value="{{$item->selling_price}}">
-        </div>
-
-         <div class="form-group">
-            <label for="username">Duration<span style="color:red">*</span> :</label>
-            <select name="duration" class="form-control">
-            <option value="{{$item->duration}}">{{$item->duration}}</option>
-                <option value="hour">Per Hour</option>
-                <option value="day">Per Day</option>
-            </select>
-        </div>
-
-         <div class="form-group">
-            <label for="username">Category <span style="color:red">*</span> :</label>
-            <select name="category" class="form-control" required>
-
-                @foreach($itemcategories as $category)
-                <option value="{{$category->name}}">{{$category->name}}</option>
-                @endforeach
-                
-            </select>
-            
+            <input class="form-control" placeholder="" type="text" name="sprice" id="sprice" value="{{$item->selling_price}}" required>
         </div>
 
         <div class="form-group">
@@ -84,7 +63,7 @@
 
         <div class="form-actions form-group">
         
-          <button type="submit" class="btn btn-primary btn-sm">Update Item</button>
+          <button type="submit" class="btn btn-success btn-sm">Update Item</button>
         </div>
 
     </fieldset>

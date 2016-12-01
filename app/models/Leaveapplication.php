@@ -52,7 +52,22 @@ class Leaveapplication extends \Eloquent {
 		$application->employee()->associate($employee);
 		$application->leavetype()->associate($leavetype);
 		$application->organization()->associate($organization);
+		$application->is_supervisor_approved = 0;
 		$application->save();
+
+		$supervisor = Supervisor::where('employee_id',$application->employee_id)->first();
+
+        $emp = Employee::where('id',$supervisor->supervisor_id)->first();
+
+		$name = $emp->first_name.' '.$emp->middle_name.' '.$emp->last_name;
+
+
+		Mail::send( 'emails.leavecreate', array('application'=>$application, 'name'=>$name), function( $message ) use ($emp)
+		{
+    		
+    		$message->to($emp->email_office )->subject( 'Leave Application' );
+		});
+
 
 	}
 

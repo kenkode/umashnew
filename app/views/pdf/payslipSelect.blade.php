@@ -11,7 +11,8 @@
 </style>
 
 <script type="text/javascript">
-$(document).ready(function() {
+$.noConflict();
+jQuery(document).ready(function($) {
 
     $('#branchid').change(function(){
         $.get("{{ url('api/branchemployee')}}", 
@@ -19,11 +20,13 @@ $(document).ready(function() {
           deptid: $('#departmentid').val()
          }, 
         function(data) {
+            var jq = $.noConflict(true);
             $('#employeeid').empty(); 
             $('#employeeid').append("<option value='All'>All</option>");
             $.each(data, function(key, element) {
                 $('#employeeid').append("<option value='" + key +"'>" + element + "</option>");
             });
+            jq('.selectpicker').selectpicker('refresh');
         });
     });
 
@@ -33,11 +36,13 @@ $(document).ready(function() {
           bid: $('#branchid').val()
         }, 
         function(data1) {
+            var jq = $.noConflict(true);
             $('#employeeid').empty(); 
             $('#employeeid').append("<option value='All'>All</option>");
             $.each(data1, function(key, element) {
                 $('#employeeid').append("<option value='" + key +"'>" + element + "</option>");
             });
+            jq('.selectpicker').selectpicker('refresh');
         });
     });
 
@@ -117,7 +122,7 @@ $(document).ready(function() {
 
            <div class="form-group">
                         <label for="username">Select Employee: <span style="color:red">*</span></label>
-                        <select required name="employeeid" id="employeeid" class="form-control">
+                        <select required name="employeeid" id="employeeid" class="form-control selectpicker" data-live-search="true">
                             <option></option>
         
                         </select>

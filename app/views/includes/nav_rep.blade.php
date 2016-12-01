@@ -96,6 +96,98 @@
 
 <li class="dropdown-submenu" >
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-file fa-fw"></i> ERP Reports <i class="fa fa-caret-right"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-ken">
+
+       <li>
+            <a href="{{ URL::to('erpReports/selectSalesPeriod') }}">Sales</a>
+       </li>
+        <li>
+           <a href="{{ URL::to('erpReports/sales_summary') }}" target="_blank"> Sales Summary</a>
+          </li> 
+
+       <li>
+            <a href="{{ URL::to('erpReports/selectPurchasesPeriod') }}">Purchases</a>
+       </li>
+
+       <li>
+            <a href="{{ URL::to('erpReports/selectClientsPeriod') }}">Clients</a>
+       </li>
+
+       <li>
+          <a href="{{ URL::to('erpReports/selectItemsPeriod') }}">Items</a>
+       </li>
+
+       <li>
+          <a href="{{ URL::to('erpReports/selectExpensesPeriod') }}">Expenses</a>
+       </li>
+    
+       <li>
+          <a target="blank" href="{{ URL::to('erpReports/paymentmethods') }}">Payment Methods</a>
+       </li>  
+
+       <li>
+         <a href="{{ URL::to('erpReports/Payments') }}" target="_blank">Payments</a>     
+       </li>
+
+        <li>
+         <a href="{{ URL::to('erpReports/locations') }}" target="_blank">Stores</a>     
+       </li> 
+
+        <li>
+         <a href="{{ URL::to('erpReports/selectStockPeriod') }}">Stock report </a>     
+       </li> 
+
+
+        <li>
+         <a href="{{ URL::to('erpReports/pricelist') }}" target="_blank">Price List </a>     
+       </li>
+
+        <li>
+         <a href="{{ URL::to('erpReports/accounts') }}" target="_blank">Account Balances </a>     
+       </li>
+
+    </ul>
+
+</li>
+
+<li class="dropdown-submenu" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-file fa-fw"></i> Morgue Reports <i class="fa fa-caret-right"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-ken">
+
+       <li>
+            <a href="{{ URL::to('umashreports/selectEnquiryPeriod') }}">Enquiries</a>
+       </li>      
+
+       <li>
+            <a href="{{ URL::to('umashreports/selectAdmissionPeriod') }}">Admissions</a>
+       </li>
+
+        <li>
+            <a href="{{ URL::to('umashreports/selectBookingPeriod') }}">Bookings</a>
+       </li>
+       
+       <li>
+            <a href="{{ URL::to('umashreports/selectCarPeriod') }}">Cars</a>
+       </li>
+
+        <li>
+            <a href="{{ URL::to('umashreports/selectDriverPeriod') }}">Drivers</a>
+       </li>    
+
+       <li>
+            <a href="{{ URL::to('umashreports/selectJinsurancePeriod') }}">Jubilee Insurance</a>
+       </li> 
+
+    </ul>
+
+</li>
+
+<li class="dropdown-submenu" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-file fa-fw"></i> Salary Advance Reports <i class="fa fa-caret-right"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-ken">
@@ -181,6 +273,8 @@
     </ul>
 
 </li>
+
+
 
     </div>
 

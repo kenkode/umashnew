@@ -12,10 +12,23 @@
 
 
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-lg-12" style="margin-top: 2%;">
 
+  @if (Session::get('alert'))
+            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{Session::get('alert')}}</strong> 
+          </div>    
+        @endif
     @if (Session::get('notice'))
-            <div class="alert alert-info">{{ Session::get('notice') }}</div>
+            <div class="alert alert-info alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{Session::get('notice')}}</strong> 
+          </div>    
         @endif
 
     <div class="panel panel-default">
@@ -68,12 +81,12 @@
                   </button>
           
                   <ul class="dropdown-menu" role="menu">
-                      @if(!User::exists($employee))
+                      @if($employee->is_css_active == false)
                     <li><a href="{{URL::to('portal/activate/'.$employee->id)}}">Activate</a></li>
                   
                         @endif
                    
-                           @if(User::exists($employee))
+                           @if($employee->is_css_active == true)
                     <li><a href="{{URL::to('portal/deactivate/'.$employee->id)}}">Deactivate</a></li>
  @endif
                     

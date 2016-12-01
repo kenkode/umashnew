@@ -804,6 +804,8 @@ function asMoney($value) {
           
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{URL::to('occurences/view/'.$occurence->id)}}">View</a></li>
+                    
+                    <li><a href="{{asset('/public/uploads/employees/documents/'.$occurence->doc_path) }}">Download</a></li>
                    
                     <li><a href="{{URL::to('occurences/delete/'.$occurence->id)}}" onclick="return (confirm('Are you sure you want to delete this employee`s occurence?'))">Delete</a></li>
                     

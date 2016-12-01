@@ -5,7 +5,7 @@
 
 <div class="row">
 
-	<div class="col-lg-5">
+	<div class="col-lg-5" style="margin-top: 3%;">
 
 		<br/>
 
@@ -39,27 +39,14 @@
           <tr>
 
             @foreach($roles as $role)
-       
-
-
-         
-
             <td>
 
               <input type="checkbox" name="role[]" value="{{ $role->id }}"> {{$role->name}}
 
 
             </td>
-
-         
-
-
-       
         @endforeach
-
-
           </tr>
-
         </table>
         </div>
 

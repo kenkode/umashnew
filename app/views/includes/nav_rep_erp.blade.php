@@ -1,6 +1,8 @@
+
+
 <style type="text/css">
 #wrap{
-    margin-top: 90px !important;
+    margin-top: 50px !important;
     position: fixed;
     top: 0;
     z-index: 10000;
@@ -8,7 +10,8 @@
 }
 </style>
 
- <nav class="navbar-default navbar-static-side" id="wrap" role="navigation">
+
+ <nav class="navbar-default navbar-static-side" role="navigation" id="wrap">
     
            
 
@@ -18,15 +21,27 @@
                 <ul class="nav" id="side-menu">
 
                     <li>
-                        <a href="{{ URL::to('erpReports/clients') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Clients</a>
+                        <a href="{{ URL::to('erpReports/selectClientsPeriod') }}"><i class="glyphicon glyphicon-file fa-fw"></i> Customers / Suppliers</a>
                     </li>
 
                     <li>
-                        <a href="{{ URL::to('erpReports/items') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Items</a>
+                        <a href="{{ URL::to('erpReports/selectSalesPeriod') }}"><i class="glyphicon glyphicon-file fa-fw"></i> Sales</a>
+                    </li> 
+
+                     <li>
+                        <a href="{{ URL::to('erpReports/sales_summary') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Sales Summary</a>
+                    </li>  
+
+                    <li>
+                        <a href="{{ URL::to('erpReports/selectPurchasesPeriod') }}"><i class="glyphicon glyphicon-file fa-fw"></i> Purchases</a>
+                    </li>  
+
+                    <li>
+                        <a href="{{ URL::to('erpReports/selectItemsPeriod') }}"><i class="glyphicon glyphicon-file fa-fw"></i> Items</a>
                     </li>
 
                     <li>
-                        <a href="{{ URL::to('erpReports/expenses') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Expenses</a>
+                        <a href="{{ URL::to('erpReports/selectExpensesPeriod') }}"><i class="glyphicon glyphicon-file fa-fw"></i> Expenses</a>
                     </li>
 
                     <li>
@@ -35,6 +50,27 @@
 
                     <li>
                         <a href="{{ URL::to('erpReports/payments') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Payments</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ URL::to('erpReports/locations') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Stores</a>
+                    </li>  
+
+
+                    <li>
+                        <a href="{{ URL::to('erpReports/selectStockPeriod') }}"><i class="glyphicon glyphicon-file fa-fw"></i> Stock Report</a>
+                    </li>  
+
+                    <li>
+                        <a href="{{ URL::to('erpReports/pricelist') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Pricelist</a>
+                    </li>    
+
+                    <li>
+                        <a href="{{ URL::to('erpReports/accounts') }}" target="_blank"><i class="glyphicon glyphicon-file fa-fw"></i> Account Balances</a>
+                    </li>   
+
+                     <li>
+                        <a href="{{ URL::to('financialreports') }}"><i class="glyphicon glyphicon-file fa-fw"></i> Financial Reports</a>
                     </li>  
 
                     

@@ -53,14 +53,20 @@
                     
                 </li>
 
-<!--
+
                  <li  >
-                    <a  href="{{ URL::to('erpmgmt')}}">
-                        <i class="fa fa-list fa-fw"></i>  {{{ Lang::get('messages.nav.inventory') }}}
+                    <a  href="{{ URL::to('morgue')}}">
+                        <i class="glyphicon glyphicon-plus fa-fw"></i>  {{{ Lang::get('messages.nav.morgue') }}}
                     </a>
                     
                 </li>
--->
+
+                <li  >
+                    <a  href="{{ URL::to('erpmgmt')}}">
+                        <i class="glyphicon glyphicon-book fa-fw"></i>  {{{ Lang::get('messages.nav.erp') }}}
+                    </a>
+                    
+                </li>
 
                 <li  >
                     <a  href="{{ URL::to('other_earnings')}}">
@@ -70,12 +76,12 @@
                 </li>
 
 
-                <li  >
+                <!-- <li  >
                     <a  href="{{ URL::to('leavemgmt')}}">
                         <i class="fa fa-list fa-fw"></i>  {{{ Lang::get('messages.nav.leave') }}}
                     </a>
                     
-                </li>
+                </li> -->
 
 <!--
 

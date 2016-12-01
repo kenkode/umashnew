@@ -1,4 +1,4 @@
-@extends('layouts.leave')
+@extends('layouts.main')
 
 {{ HTML::style('bootstrap-select-master/dist/css/bootstrap-select.css') }}
 {{ HTML::script('media/jquery-1.12.0.min.js') }}
@@ -21,7 +21,7 @@
 
 
 <div class="row">
-	<div class="col-lg-5">
+	<div class="col-lg-5" style="margin-top:3.75%;">
 
     
 		
@@ -201,7 +201,7 @@
   </form>
 </div>
 
-		 <form method="POST" action="{{{ URL::to('leaveapplications') }}}" accept-charset="UTF-8">
+		 <form method="POST" action="{{{ URL::to('leaveapplications') }}}" accept-charset="UTF-8" >
    
     <fieldset>
 
@@ -229,11 +229,11 @@
 
 
         <div class="form-group">
-                        <label for="username">Start Date <span style="color:red">*</span></label>
-                        <div class="right-inner-addon ">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                        <input required class="form-control datepicker21" readonly="readonly" placeholder="" type="text" name="applied_start_date" id="appliedstartdate" value="{{{ Input::old('applied_start_date') }}}">
-                    </div>
+            <label for="username">Start Date <span style="color:red">*</span></label>
+            <div class="right-inner-addon ">
+            <i class="glyphicon glyphicon-calendar"></i>
+            <input required class="form-control datepicker21" readonly="readonly" placeholder="" type="text" name="applied_start_date" id="appliedstartdate" value="{{{ Input::old('applied_start_date') }}}">
+        </div>
        </div>
 
 

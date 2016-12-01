@@ -3,12 +3,12 @@
 
 <br><div class="row">
 	<div class="col-lg-12">
-  <h3>New Store</h3>
+  <h4>New Store</h4>
 
 <hr>
 </div>	
 </div>
-
+<font color="red"><i>All fields marked with * are mandatory</i></font>
 
 <div class="row">
 	<div class="col-lg-5">
@@ -28,12 +28,12 @@
     <fieldset>
         <div class="form-group">
             <label for="username">Store name <span style="color:red">*</span> :</label>
-            <input class="form-control" placeholder="" type="text" name="name" id="name" value="{{{ Input::old('name') }}}">
+            <input class="form-control" placeholder="" type="text" name="name" id="name" value="{{{ Input::old('name') }}}" required>
         </div>
 
 
         <div class="form-group">
-            <label for="username">Description <span style="color:red">*</span> :</label>
+            <label for="username">Description :</label>
             <textarea name="description" class="form-control"></textarea>
         </div>
 
@@ -41,7 +41,7 @@
 
         <div class="form-actions form-group">
         
-          <button type="submit" class="btn btn-primary btn-sm">Create</button>
+          <button type="submit" class="btn btn-success btn-sm">Create</button>
         </div>
 
     </fieldset>

@@ -124,6 +124,9 @@ class OrganizationsController extends \BaseController {
 		$organization->bank_branch_id = Input::get('bbranch_id');
 		$organization->bank_account_number = Input::get('acc');
 		$organization->swift_code = Input::get('code');
+		$organization->footnote1 = Input::get('footnote1');
+		$organization->footnote2 = Input::get('footnote2');
+		/*$organization->footnote3 = Input::get('footnote3');*/
 		$organization->update();
 
 		return Redirect::route('organizations.index');

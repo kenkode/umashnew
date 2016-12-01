@@ -52,7 +52,7 @@ public static function getOrganizationName(){
 
 	$organization_id = Confide::user()->organization_id;
 
-	$organization = Organization::find($organization_id);
+	$organization = Organization::find(1);
 
 	return $organization->name;
 

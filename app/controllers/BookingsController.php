@@ -22,8 +22,12 @@ class BookingsController extends \BaseController {
 	public function create()
 	{
 		$clients = Client::all();
-		$employees = Employee::all();
-		return View::make('bookings.create', compact('clients', 'employees'));
+		/*$cars = Car::all();*/
+
+		$cars = DB::table('cars')
+			  ->where('status','available')->get();
+
+		return View::make('bookings.create', compact('cars', 'clients'));
 	}
 
 	/**
@@ -33,16 +37,35 @@ class BookingsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Booking::$rules);
+		$validator = Validator::make($data = Input::all(), Booking::$rules, Booking::$messages);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		Booking::create($data);
+		$client = Client::findOrFail(Input::get('client_id'));
+		$car = Car::findOrFail(Input::get('car_id'));
 
+		$booking = new Booking;
+
+		$booking->client()->associate($client);
+		$booking->car()->associate($car);
+		$booking->date = date('Y-m-d');
+		$booking->destination = Input::get('destination');
+		/*$booking->distance = Input::get('distance');*/
+		$booking->date_out = Input::get('date_out');
+		$booking->date_back = Input::get('date_back');
+		$booking->branch = Input::get('branch');
+		$booking->status = 'active';
+
+		$booking->save();
+
+
+		$car->status = 'booked';
+		$car->update();
 		return Redirect::route('bookings.index');
+
 	}
 
 	/**
@@ -68,7 +91,10 @@ class BookingsController extends \BaseController {
 	{
 		$booking = Booking::find($id);
 
-		return View::make('bookings.edit', compact('booking'));
+		$clients = Client::all();
+		$cars = Car::all();
+
+		return View::make('bookings.edit', compact('booking', 'cars', 'clients'));
 	}
 
 	/**
@@ -88,7 +114,16 @@ class BookingsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$booking->update($data);
+		$client = Client::findOrFail(Input::get('client_id'));
+		$car = Car::findOrFail(Input::get('car_id'));
+
+		$booking->client()->associate($client);
+		$booking->car()->associate($car);
+		$booking->destination = Input::get('destination');
+		$booking->date_out = Input::get('date_out');
+		$booking->date_back = Input::get('date_back');
+		$booking->branch = Input::get('branch');
+		$booking->update();
 
 		return Redirect::route('bookings.index');
 	}
@@ -101,91 +136,19 @@ class BookingsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$bk = Booking::find($id);
-		$bk->is_cancelled = true;
-		$bk->update();
-
+		Booking::destroy($id);
 
 		return Redirect::route('bookings.index');
 	}
 
 
-	public function add(){
+	public function cancel($id)
+	{
+		$booking = Booking::findOrFail($id);
+		$booking->status = 'cancelled';
+		$booking->update();
 
-		$data = Input::all();
-		Session::put( 'booking', array(
-    					
-    					'client_id' => array_get($data, 'client_id'), 
-    					'start_date' => array_get($data, 'start_date'),
-    					'end_date' => array_get($data, 'end_date'),
-    					'event' => array_get($data, 'event'),
-    					'venue' => array_get($data, 'venue'),
-    					'lead' => array_get($data, 'lead')
-    					)
-   					);
-
-		
-
-  		Session::put('bookingitems', []);
-
-  		$bookingitems =Session::get('bookingitems');
-  		$booking =Session::get('booking');
-  		$items = Item::all();
-
-  		return View::make('bookings.bookingitems', compact('bookingitems', 'booking', 'items'));
-	}
-
-
-	public function additems(){
-
-		$data = Input::all();
-
-		Session::push('bookingitems', array(
-
-					'item' => array_get($data, 'item')
-
-				)
-			);
-		$bookingitems =Session::get('bookingitems');
-  		$booking =Session::get('booking');
-  		$items = Item::all();
-
-  		return View::make('bookings.bookingitems', compact('bookingitems', 'booking', 'items'));
-
-	}
-
-
-	public function commit(){
-
-		$bookingitems =Session::get('bookingitems');
-  		$booking =Session::get('booking');
-
-  		echo '<pre>';
-  		print_r($booking);
-
-  		/*$client = Client::findOrFail($booking['client_id']);
-
-  		
-  		$booking = new Booking;
-  		$booking->client()->associate($client);
-  		$booking->event = $booking['event'];
-  		$booking->start_date = $booking['start_date'];
-  		$booking->end_date = $booking['end_date'];
-  		$booking->venue = $booking['venue'];
-  		$booking->lead = $booking['lead'];
-  		$booking->save();
-
-  		foreach($bookingitems as $bookingitem){
-  			
-  				$item = Item::findOrFail($bookingitem['item']);
-  				$bookingitem = new Bookingitem;
-  				$bookingitem->item()->associate($item);
-  				$bookingitem->booking()->associate($booking);
-  				$bookingitem->save();
-  		}
-
-*/
-
+		return Redirect::route('bookings.index');
 	}
 
 }

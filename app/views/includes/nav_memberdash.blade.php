@@ -26,30 +26,7 @@
         
 
             <ul class="nav navbar-top-links navbar-right">
-         
-               
-                
-               
-
-                 
-
-               
-               
-
-               
-
-               
-
-                
-                
-
-                
-
-                
-
-
-
-                
+        
 
 
                 <!-- /.dropdown -->
@@ -59,7 +36,7 @@
                         <i class="fa fa-user fa-fw"></i>  {{ Confide::user()->username}} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{ URL::to('members/profile' ) }}"><i class="fa fa-user fa-fw"></i>  Profile</a>
+                        <li><a href="{{ URL::to('users/profile/'.Confide::user()->id ) }}"><i class="fa fa-user fa-fw"></i>  Profile</a>
                         </li>
                         
                         <li class="divider"></li>

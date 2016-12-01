@@ -30,10 +30,10 @@ class Employee extends Eloquent {
 		 'identity_number' => 'required|unique:employee',
 		 'dob'=>'required',
 		 'gender'=>'required',
-		 'jgroup_id'=>'required',
-		 'type_id'=>'required',
-		 'pay' => 'required|regex:/^(\$?(?(?=\()(\())\d+(?:,\d+)?(?:\.\d+)?(?(2)\)))$/',
-		 'djoined'=>'required',
+		 //'jgroup_id'=>'required',
+		 //'type_id'=>'required',
+		 //'pay' => 'required|regex:/^(\$?(?(?=\()(\())\d+(?:,\d+)?(?:\.\d+)?(?(2)\)))$/',
+		 //'djoined'=>'required',
 		 'email_office' => 'required|email|unique:employee',
 		 'email_personal' => 'email|unique:employee',
 		 'passport_number' => 'unique:employee',
@@ -57,10 +57,10 @@ class Employee extends Eloquent {
          'identity_number' => 'required|unique:employee,identity_number,' . $id,
 		 'dob'=>'required',
 		 'gender'=>'required',
-		 'pay' => 'required|regex:/^(\$?(?(?=\()(\())\d+(?:,\d+)?(?:\.\d+)?(?(2)\)))$/',
-		 'jgroup_id'=>'required',
-		 'type_id'=>'required',
-		 'djoined'=>'required',
+		 //'pay' => 'required|regex:/^(\$?(?(?=\()(\())\d+(?:,\d+)?(?:\.\d+)?(?(2)\)))$/',
+		 //'jgroup_id'=>'required',
+		 //'type_id'=>'required',
+		 //'djoined'=>'required',
 		 'email_office' => 'required|email|unique:employee,email_office,' . $id,
 		 'email_personal' => 'email|unique:employee,email_personal,' . $id,
 		 'passport_number' => 'unique:employee,passport_number,' . $id,
@@ -81,15 +81,15 @@ class Employee extends Eloquent {
         'fname.required'=>'Please insert employee`s first name!',
         'lname.required'=>'Please insert employee`s last name!',
         'gender.required'=>'Please insert employee`s gender!',
-        'djoined.required'=>'Please insert date employee joined the company!',
+        //'djoined.required'=>'Please insert date employee joined the company!',
         'dob.required'=>'Please insert employee`s date of birth!',
-        'jgroup_id.required'=>'Please insert Employee`s job group!',
-        'type_id.required'=>'Please insert employee`s type!',
-        'pay.required'=>'Please insert employee`s basic salary!',
+        //'jgroup_id.required'=>'Please insert Employee`s job group!',
+        //'type_id.required'=>'Please insert employee`s type!',
+        //'pay.required'=>'Please insert employee`s basic salary!',
         'identity_number.required'=>'Please insert employee`s identity number!',
         'identity_number.unique'=>'That identity number already exists!',
-        'pay.required'=>'Please insert basic pay or 0.00 if employee has no salary!',
-        'pay.regex'=>'Please insert a valid salary!',
+        //'pay.required'=>'Please insert basic pay or 0.00 if employee has no salary!',
+        //'pay.regex'=>'Please insert a valid salary!',
         'email_office.required'=>'Please insert employee`s office email!',
         'email_office.unique'=>'That employee`s office email already exists!',
         'email_personal.unique'=>'That employee personal email already exists!',
@@ -157,6 +157,11 @@ class Employee extends Eloquent {
     public function education(){
 
 		return $this->hasMany('Education');
+	}
+
+	public function supervisor(){
+
+		return $this->hasMany('Supervisor');
 	}
 
 

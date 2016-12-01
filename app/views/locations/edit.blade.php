@@ -3,7 +3,7 @@
 
 <br><div class="row">
 	<div class="col-lg-12">
-  <h3>Update Store</h3>
+  <h4>Update Store</h4>
 
 <hr>
 </div>	
@@ -24,7 +24,7 @@
         @endif
 
 		 <form method="POST" action="{{{ URL::to('locations/update/'.$location->id) }}}" accept-charset="UTF-8">
-   
+   <font color="red"><i>All fields marked with * are mandatory</i></font>
     <fieldset>
         <div class="form-group">
             <label for="username">Store name <span style="color:red">*</span> :</label>
@@ -33,7 +33,7 @@
 
 
         <div class="form-group">
-            <label for="username">Description <span style="color:red">*</span> :</label>
+            <label for="username">Description :</label>
             <textarea name="description" class="form-control">{{$location->description}}</textarea>
         </div>
 
@@ -41,7 +41,7 @@
 
         <div class="form-actions form-group">
         
-          <button type="submit" class="btn btn-primary btn-sm">Update</button>
+          <button type="submit" class="btn btn-success btn-sm">Update</button>
         </div>
 
     </fieldset>

@@ -1672,6 +1672,22 @@ $(document).ready(function() {
                         </div>
                   </div>
                   <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="username">Assign Supervisor</label>
+                        <select name="supervisor" id="supervisor" class="form-control">
+                            <option></option>
+                            @if($count>0)
+                            @foreach($subordinates as $subordinate)
+                            <option value="{{ $subordinate->id }}"<?= ($subordinate->id==$supervisor->supervisor_id)?'selected="selected"':''; ?>> {{ $subordinate->first_name.' '.$subordinate->last_name }}</option>
+                            @endforeach
+                            @else
+                            @foreach($subordinates as $subordinate)
+                            <option value="{{ $subordinate->id }}"> {{ $subordinate->first_name.' '.$subordinate->last_name }}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                
+                    </div>
                   <div class="checkbox">
                         <label>
                             <input type="checkbox" value="{{{ $employee->in_employment }}}"<?= ($employee->in_employment=='Y')?'checked="checked"':''; ?> name="active">

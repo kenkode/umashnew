@@ -9,3 +9,85 @@
 [24-May-2016 06:30:59 UTC] PHP Fatal error:  Call to a member function clearAll() on a non-object in /home/umashcok/public_html/cloud/umash/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php on line 830
 [02-Jun-2016 06:52:53 UTC] PHP Fatal error:  Call to undefined method stdClass::number_format() in /home/umashcok/public_html/cloud/umash/app/controllers/ReportsController.php on line 5298
 [02-Jun-2016 07:17:10 UTC] PHP Fatal error:  Call to undefined method Maatwebsite\Excel\Writers\CellWriter::setAllignment() in /home/umashcok/public_html/cloud/umash/app/controllers/ReportsController.php on line 5209
+[05-Aug-2016 12:15:00 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 8388608 bytes) in /home/umashcok/public_html/cloud/umash/vendor/dompdf/dompdf/include/frame.cls.php on line 406
+[10-Aug-2016 12:38:28 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.2075618932.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[10-Aug-2016 12:38:28 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[10-Aug-2016 12:38:28 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[10-Aug-2016 12:43:49 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1091153184.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[10-Aug-2016 12:43:49 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[10-Aug-2016 12:43:49 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[10-Aug-2016 12:44:48 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1403785295.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[10-Aug-2016 12:44:48 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[10-Aug-2016 12:44:48 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[10-Aug-2016 13:24:43 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.430576095.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[10-Aug-2016 13:24:43 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[10-Aug-2016 13:24:43 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[10-Aug-2016 13:24:47 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.288789765.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[10-Aug-2016 13:24:47 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[10-Aug-2016 13:24:47 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[10-Aug-2016 13:24:50 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1515157867.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[10-Aug-2016 13:24:50 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[10-Aug-2016 13:24:50 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[11-Aug-2016 11:07:27 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.677891351.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[11-Aug-2016 11:07:27 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[11-Aug-2016 11:07:27 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[11-Aug-2016 13:37:48 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.556306607.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[11-Aug-2016 13:37:48 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[11-Aug-2016 13:37:48 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[16-Sep-2016 11:41:35 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/umashcok/public_html/cloud/umash/app/storage/views/919ac8ad4a6c6ef8666af7b19faf522f on line 41
+[16-Sep-2016 11:48:32 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/umashcok/public_html/cloud/umash/app/storage/views/919ac8ad4a6c6ef8666af7b19faf522f on line 41
+[20-Sep-2016 06:10:40 UTC] PHP Fatal error:  Call to a member function clearAll() on a non-object in /home/umashcok/public_html/cloud/umash/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php on line 830
+[20-Sep-2016 06:30:32 UTC] PHP Fatal error:  Cannot redeclare getmypid() in /home/umashcok/public_html/cloud/umash/app/controllers/MembersController.php on line 320
+[20-Sep-2016 06:34:44 UTC] PHP Fatal error:  Cannot redeclare getmypid() in /home/umashcok/public_html/cloud/umash/app/controllers/MembersController.php on line 320
+[20-Sep-2016 06:46:31 UTC] PHP Fatal error:  Call to a member function clearAll() on a non-object in /home/umashcok/public_html/cloud/umash/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php on line 830
+[31-Oct-2016 16:04:05 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.2.1977891896.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:04:05 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:04:05 Africa/Nairobi] PHP Fatal error:  XCache: failed init variable cache in Unknown on line 0
+[31-Oct-2016 16:04:25 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.1.1766697606.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:04:25 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:04:25 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:04:35 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.849376644.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:04:35 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:04:35 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:04:36 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1618110516.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:04:36 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:04:36 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:04:39 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1793059876.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:04:39 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:04:39 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:04:45 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.2104988140.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:04:45 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:04:45 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:04:57 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1674958009.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:04:57 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:04:57 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:05:47 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1506637125.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:05:47 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:05:47 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:06:03 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.2010956350.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:06:03 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:06:03 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:06:16 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1284684951.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:06:16 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:06:16 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:08:23 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1306222897.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:08:23 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:08:23 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:08:24 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1000774818.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:08:24 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:08:24 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:18:52 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.58028389.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:18:52 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:18:52 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:40:54 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.654169697.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:40:54 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:40:54 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:53:42 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.92344634.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:53:42 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:53:42 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 16:57:09 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.0.1561080521.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 16:57:09 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 16:57:09 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0
+[31-Oct-2016 17:02:49 Africa/Nairobi] PHP Fatal error:  xc_fcntl_create: open(/tmp/.xcache.1046.1.1585652805.lock, O_RDWR|O_CREAT, 0666) failed: in Unknown on line 0
+[31-Oct-2016 17:02:49 Africa/Nairobi] PHP Fatal error:  XCache: can't create lock in Unknown on line 0
+[31-Oct-2016 17:02:49 Africa/Nairobi] PHP Fatal error:  XCache: failed init opcode cache in Unknown on line 0

@@ -28,8 +28,11 @@ class UsersController extends Controller
     public function edit($user){
 
         $user = User::find($user);
-
+        if(Confide::user()->user_type == 'admin'){
         return View::make('users.edit')->with('user', $user);
+        }else if(Confide::user()->user_type == 'member'){
+        return View::make('css.usernameedit')->with('user', $user);
+    }
     }
 
 
@@ -346,8 +349,11 @@ class UsersController extends Controller
     public function password($user){
 
         $user = User::find($user);
+        if(Confide::user()->user_type == 'admin'){
         return View::make('users.password', compact('user'));
-
+        }else if(Confide::user()->user_type == 'member'){
+        return View::make('css.userpassword', compact('user'));
+        }
     }
 
 
@@ -358,9 +364,12 @@ class UsersController extends Controller
 
         $user = User::find($user);
 
+        if(Confide::user()->user_type == 'admin'){
         return View::make('users.profile', compact('user'));
+        }else if(Confide::user()->user_type == 'member'){
+        return View::make('css.profile', compact('user'));
     }
-
+    }
 
     public function add(){
 
@@ -484,14 +493,10 @@ class UsersController extends Controller
 
         $repo = App::make('UserRepository');
         $user = $repo->register($input);
-         
-
             foreach ($roles as $role) {
 
                 $user->attachRole($role);
             }
-        
-
         return Redirect::to('users');
     }
 

@@ -66,7 +66,7 @@ function asMoney($value) {
         <input type="hidden" value="{{ $period }}" name="period"/>
         
      
-  <h3 align="left">Processed Payroll for {{ $period }}</h3>
+  <h3 align="left">Processed Payroll for {{ $period }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="blank" href="{{URL::to('payrollReports/selectRemittance/'.$period)}}" style="background-color:orange;color:white;font-size:16px;padding:10px;border-radius:5px;text-decoration:none">Bank Remittance Report</a>&nbsp;&nbsp;&nbsp;<a target="blank" href="{{URL::to('payrollReports/selectSummary/'.$period)}}" style="color:white;font-size:16px;background-color:green;padding:10px;border-radius:5px;text-decoration:none">Payroll Summary Report</a></h3>
 </div>
 <hr>
 

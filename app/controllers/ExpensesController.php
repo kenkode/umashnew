@@ -11,8 +11,6 @@ class ExpensesController extends \BaseController {
 	{
 		$expenses = Expense::all();
 
-		Audit::logaudit('Expenses', 'view', 'viewed expenses');
-
 		return View::make('expenses.index', compact('expenses'));
 	}
 
@@ -23,7 +21,8 @@ class ExpensesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('expenses.create');
+		$accounts = Account::all();
+		return View::make('expenses.create',compact('accounts'));
 	}
 
 	/**
@@ -33,16 +32,28 @@ class ExpensesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Expense::$rules);
+		$validator = Validator::make($data = Input::all(), Expense::$rules, Expense::$messages);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		Expense::create($data);
+		$expense = new Expense;
 
-		return Redirect::route('expenses.index')->withFlashMessage('Expenses successfully created!');
+		$expense->name = Input::get('name');
+		$expense->type = Input::get('type');
+		$expense->amount = Input::get('amount');		
+		$expense->date = date("Y-m-d",strtotime(Input::get('date')));
+		$expense->account_id = Input::get('account');
+		$expense->save();
+
+        DB::table('accounts')
+            ->join('expenses','accounts.id','=','expenses.account_id')
+            ->where('accounts.id', Input::get('account'))
+            ->decrement('accounts.balance', Input::get('amount'));
+
+		return Redirect::route('expenses.index')->withFlashMessage('Expense successfully created!');
 	}
 
 	/**
@@ -67,8 +78,9 @@ class ExpensesController extends \BaseController {
 	public function edit($id)
 	{
 		$expense = Expense::find($id);
+		$accounts = Account::all();
 
-		return View::make('expenses.edit', compact('expense'));
+		return View::make('expenses.edit', compact('expense','accounts'));
 	}
 
 	/**
@@ -81,16 +93,22 @@ class ExpensesController extends \BaseController {
 	{
 		$expense = Expense::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Expense::$rules);
+		$validator = Validator::make($data = Input::all(), Expense::$rules, Expense::$messages);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+     
+        $expense->name = Input::get('name');
+		$expense->type = Input::get('type');
+		$expense->amount = Input::get('amount');
+		$expense->date = date("Y-m-d",strtotime(Input::get('date')));
+		$expense->account_id = Input::get('account');
 
-		$expense->update($data);
+		$expense->update();
 
-		return Redirect::route('expenses.index')->withFlashMessage('Expenses successfully updated!');
+		return Redirect::route('expenses.index')->withFlashMessage('Expense successfully updated!');;
 	}
 
 	/**
@@ -101,10 +119,9 @@ class ExpensesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$expense = Expense::findOrFail($id);
 		Expense::destroy($id);
-        Audit::logaudit('Expenses', 'delete', 'deleted: '.$expense->name);
-		return Redirect::route('expenses.index')->withDeleteMessage('Expenses successfully deleted!');
+
+		return Redirect::route('expenses.index')->withDeleteMessage('Expense successfully deleted!');;
 	}
 
 }

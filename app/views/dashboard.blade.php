@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main2')
 
 {{ HTML::script('media/jquery-1.12.0.min.js') }}
 
@@ -23,11 +23,14 @@ ul {
 
 <br><br>
 
-@if (Session::get('notice'))
-            <div class="alert alert-info">{{ Session::get('notice') }}</div>
-        @endif
-    
-
+ @if(Session::get('notice')))
+            <div class="alert alert-info alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ Session::get('notice') }}</strong> 
+          </div>      
+@endif
     <script type="text/javascript">
     $(document).ready(function(){
       $('#companyinfo').hide();
@@ -183,7 +186,7 @@ ul {
     <li><a href="{{ URL::to('leaveapprovals') }}">Leaves Approved</a></li>
     <li><a  href="{{ URL::to('leaverejects') }}">Leaves Rejected</a></li>
     </ul>
-    <li><a target="_blank" href="{{ URL::to('EmployeeForm') }}"> Employee Detail Form</a></li>
+    <li><a target="_blank" href="{{asset("public/uploads/employees/documents/umash appointment letter.docx")}}"> Employee Detail Form</a></li>
     <li> <a href="{{ URL::to('payrollReports/selectPeriod') }}">  Payslips</a> </li>
    
   </ul>
@@ -227,6 +230,16 @@ ul {
          <li><a href="{{ URL::to('email/payslip') }}">  Email Payslips</a></td>      
         
     </ul>
+    </div>
+
+    <div class="col-lg-4">
+    <a href="{{URL::to('erpmgmt')}}" id="erp"><img src="{{asset('public/uploads/images/software-carton-1076811_640.jpg')}}" alt="logo" width="20%">ERP</a>
+    </div>
+  </div>
+
+    <div class="col-lg-12">
+    <div class="col-lg-4">
+    <a href="{{URL::to('morgue')}}" id="erp"><img src="{{asset('public/uploads/images/morgue.jpg')}}" alt="logo" width="20%">MORGUE</a>
     </div>
 
     <div class="col-lg-4">
@@ -341,20 +354,9 @@ ul {
 
     </ul>
     </div>
-
-  </div>
-
-  <div class="row">
-
-  <div class="col-lg-12">
-    <hr>
-  </div>  
   
-</div>
 
-  <div class="col-lg-12">
-
-    <div style="margin-left:700px;" class="col-lg-4">
+    <div class="col-lg-4">
     <a href="{{ URL::to('users/logout') }}"><img src="{{asset('public/uploads/images/logout-153871_1280.png')}}" alt="logo" width="20%">LOG OUT / CHANGE USER</a>
     </div>
 
